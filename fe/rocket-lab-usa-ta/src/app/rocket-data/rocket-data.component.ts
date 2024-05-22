@@ -24,8 +24,8 @@ import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-sug
   ]
 })
 export class RocketDataComponent implements OnInit, OnDestroy {
-  public searchPath$ = new Subject<string>();
-  public searchPathToDebounce$ = new BehaviorSubject('');
+  public searchInputToDebounce$ = new Subject<string>();
+  public searchPath$ = new BehaviorSubject('');
   public searchTermFromPath$ = new BehaviorSubject('');
   public data$ = new BehaviorSubject<DataNode | undefined>(undefined);
   public searchPathResults$ = new BehaviorSubject<string[]>([]);
@@ -40,10 +40,10 @@ export class RocketDataComponent implements OnInit, OnDestroy {
 
   private _subscribeToSearch(): void {
     this.subscription.add(
-      this.searchPath$.pipe(
+      this.searchInputToDebounce$.pipe(
         debounceTime(200)
       ).subscribe((path) => {
-        this.searchPathToDebounce$.next(path);
+        this.searchPath$.next(path);
         this.setSearchTermFromPath();
         this.searchPathResults$.next(this.rocketService.searchPaths(path));
         this.getData(path);
@@ -52,7 +52,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   }
 
   private setSearchTermFromPath(): void {
-    const term = this.searchPathToDebounce$.value.split('/').pop() ?? '';
+    const term = this.searchPath$.value.split('/').pop() ?? '';
     this.searchTermFromPath$.next(term);
   }
 
@@ -61,7 +61,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   }
 
   public onSearchPathChanged(path: string): void {
-    this.searchPath$.next(path);
+    this.searchInputToDebounce$.next(path);
   }
 
   public getData(path?: string): void {

@@ -1,14 +1,14 @@
 <input
   type="text"
   placeholder="Search for a node..."
-  [ngModel]="(searchPath$ | async)"
+  [ngModel]="(searchInputToDebounce$ | async)"
   (ngModelChange)="onSearchPathChanged($event)">
 
 <p>Key: {{(data$ | async)?.key ?? 'No Key'}}</p>
 
 <div class="search-results">
   <div class="item"
-       *ngFor="let path of ((searchPathResults$ | async) ?? [] | shavePaths: (searchPathToDebounce$ | async) ?? '' : !!(data$ | async))"
+       *ngFor="let path of ((searchPathResults$ | async) ?? [] | shavePaths: (searchPath$ | async) ?? '' : !!(data$ | async))"
        [innerHTML]="path | highlightPathSuggestion: (searchTermFromPath$ | async) ?? ''">
   </div>
 </div>
