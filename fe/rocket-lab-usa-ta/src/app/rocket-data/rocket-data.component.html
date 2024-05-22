@@ -8,8 +8,9 @@
 
 <div class="search-results">
   <div class="item"
-       *ngFor="let path of ((searchPathResults$ | async) ?? [] | shavePaths: (searchPath$ | async) ?? '' : !!(data$ | async))"
-       [innerHTML]="path | highlightPathSuggestion: (searchTermFromPath$ | async) ?? ''">
+       *ngFor="let path of ((searchPathResults$ | async) ?? [] | shavePaths: (currentPath$ | async) ?? '' : !!(data$ | async))"
+       [innerHTML]="path | highlightPathSuggestion: (searchTermFromPath$ | async) ?? ''"
+       (click)="onSuggestionSelected(path)">
   </div>
 </div>
 

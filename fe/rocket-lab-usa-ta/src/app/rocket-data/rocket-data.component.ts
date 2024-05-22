@@ -24,8 +24,8 @@ import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-sug
   ]
 })
 export class RocketDataComponent implements OnInit, OnDestroy {
-  public searchInputToDebounce$ = new Subject<string>();
-  public searchPath$ = new BehaviorSubject('');
+  public searchInputToDebounce$ = new BehaviorSubject('');
+  public currentPath$ = new BehaviorSubject('');
   public searchTermFromPath$ = new BehaviorSubject('');
   public data$ = new BehaviorSubject<DataNode | undefined>(undefined);
   public searchPathResults$ = new BehaviorSubject<string[]>([]);
@@ -41,9 +41,10 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   private _subscribeToSearch(): void {
     this.subscription.add(
       this.searchInputToDebounce$.pipe(
+        skip(1),
         debounceTime(200)
       ).subscribe((path) => {
-        this.searchPath$.next(path);
+        this.currentPath$.next(path);
         this.setSearchTermFromPath();
         this.searchPathResults$.next(this.rocketService.searchPaths(path));
         this.getData(path);
@@ -52,7 +53,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   }
 
   private setSearchTermFromPath(): void {
-    const term = this.searchPath$.value.split('/').pop() ?? '';
+    const term = this.currentPath$.value.split('/').pop() ?? '';
     this.searchTermFromPath$.next(term);
   }
 
@@ -67,5 +68,29 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   public getData(path?: string): void {
     this.data$.next(this.rocketService.fetchRocketDetails(path));
     console.log('Data:', this.data$.value);
+  }
+
+  public onSuggestionSelected(path: string): void {
+    /*
+      Case 1: Rocket/Stage1/Engine1
+      Data = true;
+      - Check for / at the end
+      - If not there, add it and append selected path
+
+      Case 2: Rocket/Stage1/en
+      Data = false;
+      - Get index of last /
+      - Remove all characters after index of /
+      - Append the selected path
+     */
+
+    if (this.data$.value) {
+      const newPath = `${this.searchInputToDebounce$.value}${this.currentPath$.value.endsWith('/') ? '' : '/'}${path}`;
+      this.searchInputToDebounce$.next(newPath);
+    } else {
+      const indexOfSlash = this.searchInputToDebounce$.value.lastIndexOf('/');
+      const removedPath = this.searchInputToDebounce$.value.substring(0, indexOfSlash);
+      this.searchInputToDebounce$.next(`${removedPath}${(indexOfSlash !== -1 ? '/' : '')}${path}`);
+    }
   }
 }
