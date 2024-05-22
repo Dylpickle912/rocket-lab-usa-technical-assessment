@@ -4,6 +4,8 @@ import {AsyncPipe, NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RocketService} from "../../shared/services/rocket.service";
 import {DataNode} from "../../shared/models/node.models";
+import {ShavePathsPipe} from "../../shared/pipes/shave-paths.pipe";
+import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-suggestion.pipe";
 
 @Component({
   selector: 'app-rocket-data',
@@ -11,7 +13,9 @@ import {DataNode} from "../../shared/models/node.models";
   imports: [
     AsyncPipe,
     FormsModule,
-    NgForOf
+    NgForOf,
+    ShavePathsPipe,
+    HighlightPathSuggestionPipe
   ],
   templateUrl: './rocket-data.component.html',
   styleUrl: './rocket-data.component.scss',
@@ -21,6 +25,8 @@ import {DataNode} from "../../shared/models/node.models";
 })
 export class RocketDataComponent implements OnInit, OnDestroy {
   public searchPath$ = new Subject<string>();
+  public searchPathToDebounce$ = new BehaviorSubject('');
+  public searchTermFromPath$ = new BehaviorSubject('');
   public data$ = new BehaviorSubject<DataNode | undefined>(undefined);
   public searchPathResults$ = new BehaviorSubject<string[]>([]);
 
@@ -37,10 +43,17 @@ export class RocketDataComponent implements OnInit, OnDestroy {
       this.searchPath$.pipe(
         debounceTime(200)
       ).subscribe((path) => {
+        this.searchPathToDebounce$.next(path);
+        this.setSearchTermFromPath();
         this.searchPathResults$.next(this.rocketService.searchPaths(path));
         this.getData(path);
       })
     );
+  }
+
+  private setSearchTermFromPath(): void {
+    const term = this.searchPathToDebounce$.value.split('/').pop() ?? '';
+    this.searchTermFromPath$.next(term);
   }
 
   public ngOnDestroy() {

@@ -92,7 +92,7 @@ export class DataService {
       if (!currentNode || !currentNode.children) {
         return undefined;
       }
-      currentNode = currentNode.children.find(child => child.key === part);
+      currentNode = currentNode.children.find(child => child.key.toLowerCase() === part.toLowerCase());
     }
     return currentNode as DataNode | undefined;
   }
