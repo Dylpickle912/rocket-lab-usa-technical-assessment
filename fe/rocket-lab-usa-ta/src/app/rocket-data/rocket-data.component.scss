@@ -1,4 +1,4 @@
-@use 'variables';
+@import 'variables';
 
 .container {
   display: grid;
@@ -24,7 +24,7 @@
       height: 4rem;
       width: 100%;
       text-align: center;
-      background-color: variables.$lGrey;
+      background-color: $elGrey;
       border: none;
       outline: none;
       border-radius: 6px;
