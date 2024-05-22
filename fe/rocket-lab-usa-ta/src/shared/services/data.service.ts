@@ -1,0 +1,111 @@
+import {Injectable} from "@angular/core";
+import {NodeChild, NodeProperty, TreeNode} from "../models/node.models";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private data: TreeNode = {
+    key: 'Rocket',
+    children: [
+      { key: 'Height', value: 18.000 },
+      { key: 'Mass', value: 12000.000 },
+      {
+        key: 'Stage1',
+        children: [
+          { key: 'Engine1', children: [
+              { key: 'Thrust', value: 9.493 },
+              { key: 'ISP', value: 12.156 }
+            ]
+          },
+          { key: 'Engine2', children: [
+              { key: 'Thrust', value: 9.413 },
+              { key: 'ISP', value: 11.632 }
+            ]
+          },
+          { key: 'Engine3', children: [
+              { key: 'Thrust', value: 9.899 },
+              { key: 'ISP', value: 12.551 }
+            ]
+          }
+        ]
+      },
+      {
+        key: 'Stage2',
+        children: [
+          { key: 'Engine1', children: [
+              { key: 'Thrust', value: 1.622 },
+              { key: 'ISP', value: 15.110 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+  public createNode(path: string, nodeName: string): void {
+    const parentNode = this.findNode(path);
+    if (!parentNode) return;
+    if (!parentNode.children) parentNode.children = [];
+    if (parentNode.children.find(child => child.key === nodeName)) throw new Error('Node Already Exists');
+    parentNode.children.push({ key: nodeName });
+  }
+
+  public addProperty(path: string, property: NodeProperty): void {
+    const node = this.findNode(path);
+    if (!node) return;
+    if (!node.children) node.children = [];
+    node.children.push(property);
+  }
+
+  public getSubtree(path: string): NodeChild | undefined {
+    return this.findNode(path);
+  }
+
+  private findNode(path: string): NodeChild | undefined {
+    const parts = path.split('/').filter(part => part);
+
+    if (parts.length === 0 || parts[0] !== 'Rocket') {
+      return undefined;  // Root path should always start with 'Rocket'
+    }
+
+    let currentNode: TreeNode | NodeChild | undefined = this.data;
+
+    for (let i = 1; i < parts.length; i++) {
+      const part = parts[i];
+      if (!currentNode || !currentNode.children) {
+        return undefined;
+      }
+      currentNode = currentNode.children.find(child => child.key === part);
+    }
+    return currentNode as NodeChild | undefined;
+  }
+
+  public deleteNode(path: string): void {
+    const parts = path.split('/').filter(part => part);
+
+    if (parts.length === 0) {
+      return;
+    }
+
+    let parentNode: TreeNode | NodeChild | undefined = undefined;
+    let currentNode: TreeNode | NodeChild | undefined = this.data;
+
+    for (let i = 1; i < parts.length; i++) {
+      const part = parts[i];
+      if (!currentNode || !currentNode.children) {
+        return; // Node not found
+      }
+      parentNode = currentNode;
+      currentNode = currentNode.children.find(child => child.key === part);
+    }
+
+    if (!currentNode) {
+      return;
+    }
+
+    if (parentNode && parentNode.children) {
+      parentNode.children = parentNode.children.filter(child => child.key !== currentNode.key);
+    }
+  }
+}
