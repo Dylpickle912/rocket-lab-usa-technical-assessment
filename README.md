@@ -44,3 +44,38 @@ Questions & Concerns
 ------------------------------------
 
 - When looking at the Seed Data, I noticed Stage1 and Stage2 are not encapsulated inside an array. Due to this, I am led to believe they are constant for each Rocket. However, looking at the second bullet point in the instructions, it is inferred that there are no requirements for how many children a parent can have and they can have any type. In this case, Stages[n] would not need to be encapsulated within an array.
+
+
+
+
+
+App Instructions
+------------------------------------
+
+- Create a new Angular CLI project
+- Setup a data access class (intended to mock a backend service) according to <strong>Database+API Instructions</strong>.
+
+- Component A
+   - Retrieve data from the data access class described in <strong>Database+API Instructions</strong>.
+   - Should have an input box to enter a node path
+   - On each keypress the component should query the API for a subtree matching that path. Inflight requests should be cancelled for new ones
+   - Use Component B to render the returned subtree
+ 
+- Component B
+   - Should render a returned node tree structure and all properties
+   - The label of a property should be GREEN if the value is greater than 10
+   - Create a unit test to assert that the color of the Component B label behaves as required
+ 
+   - Dialog
+      - Use the Dialog component to make a reusable 'Confirm' box
+      - Use the above technique to make a 'Delete' button with confirmation for each node (this does not need to be connected to the API)
+    
+   - Time Pipe
+      - Create a pipe that renders how long ago it was since this item was created (e.g. 'created 1 hour ago').
+      - Implement this pipe onto each item in the displayed tree
+    
+
+Questions, Concerns, and Clarifications
+------------------------------------
+
+ - Along with typing in the path to retrieve data, I decided to create a second search functionality that uses suggestions. It takes the current path and provides suggestions that shows the children of the last valid path in the input. For instance, if the input included `Stage1/Engine1/`, it would provide `['Thrust', 'ISP']` as potential suggestions. Also, if the input showed a current invalid path, for example `Stage1/en`, it will remove the last invalid piece to just create `Stage1` and provide suggestions that would be `['Engine1', 'Engine2', 'Engine3']`. These suggestions are clickable and are appended to the last valid path. For example, if the input was `Stage1/Engine1/` it would then turn into `Stage1/Engine1/Thrust` if Thrust was clicked of course. Alternatively, if the input is `Stage1/en` and `Engine3` is selected, it will return `Stage1/Engine3`
