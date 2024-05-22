@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
-import {NodeChild, NodeProperty, TreeNode} from "../models/node.models";
+import {DataNode, NodeProperty} from "../models/node.models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private data: TreeNode = {
+  private data: DataNode = {
     key: 'Rocket',
     children: [
       { key: 'Height', value: 18.000 },
@@ -58,18 +58,18 @@ export class DataService {
     node.children.push(property);
   }
 
-  public getSubtree(path: string): NodeChild | undefined {
+  public getSubtree(path: string): DataNode | undefined {
     return this.findNode(path);
   }
 
-  private findNode(path: string): NodeChild | undefined {
+  private findNode(path: string): DataNode | undefined {
     const parts = path.split('/').filter(part => part);
 
     if (parts.length === 0) {
       return undefined;
     }
 
-    let currentNode: TreeNode | NodeChild | undefined = this.data;
+    let currentNode: DataNode | undefined = this.data;
 
     for (let i = 1; i < parts.length; i++) {
       const part = parts[i];
@@ -78,7 +78,7 @@ export class DataService {
       }
       currentNode = currentNode.children.find(child => child.key === part);
     }
-    return currentNode as NodeChild | undefined;
+    return currentNode as DataNode | undefined;
   }
 
   public deleteNode(path: string): void {
@@ -88,8 +88,8 @@ export class DataService {
       return;
     }
 
-    let parentNode: TreeNode | NodeChild | undefined = undefined;
-    let currentNode: TreeNode | NodeChild | undefined = this.data;
+    let parentNode: DataNode | undefined = undefined;
+    let currentNode: DataNode | undefined = this.data;
 
     for (let i = 1; i < parts.length; i++) {
       const part = parts[i];

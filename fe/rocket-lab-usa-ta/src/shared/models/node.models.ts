@@ -1,13 +1,8 @@
-export interface TreeNode {
-  key: string,
-  children: NodeChild[]
-}
-
 export interface NodeProperty {
   key: string,
-  value?: any
+  value?: number
 }
 
-export interface NodeChild extends NodeProperty {
-  children?: (NodeChild | NodeProperty)[]
+export interface DataNode extends NodeProperty {
+  children?: (DataNode | NodeProperty)[]
 }
