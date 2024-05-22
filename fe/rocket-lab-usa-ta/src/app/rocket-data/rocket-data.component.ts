@@ -38,6 +38,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.getData();
+    this.setSearchSuggestionResults();
     this._subscribeToSearch();
   }
 
@@ -49,7 +50,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
       ).subscribe((path) => {
         this.currentPath$.next(path);
         this.setSearchTermFromPath();
-        this.searchPathResults$.next(this.rocketService.searchPaths(path));
+        this.setSearchSuggestionResults();
         this.getData(path);
       })
     );
@@ -58,6 +59,10 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   private setSearchTermFromPath(): void {
     const term = this.currentPath$.value.split('/').pop() ?? '';
     this.searchTermFromPath$.next(term);
+  }
+
+  private setSearchSuggestionResults(): void {
+    this.searchPathResults$.next(this.rocketService.searchPaths(this.currentPath$.value));
   }
 
   public ngOnDestroy() {
@@ -86,13 +91,27 @@ export class RocketDataComponent implements OnInit, OnDestroy {
       - Append the selected path
      */
 
-    if (this.data$.value) {
+    /*if (this.data$.value) {
       const newPath = `${this.searchInputToDebounce$.value}${this.currentPath$.value.endsWith('/') ? '' : '/'}${path}`;
       this.searchInputToDebounce$.next(newPath);
     } else {
       const indexOfSlash = this.searchInputToDebounce$.value.lastIndexOf('/');
       const removedPath = this.searchInputToDebounce$.value.substring(0, indexOfSlash);
       this.searchInputToDebounce$.next(`${removedPath}${(indexOfSlash !== -1 ? '/' : '')}${path}`);
+    }*/
+
+    const currentValue = this.searchInputToDebounce$.value;
+    const hasTrailingSlash = currentValue.endsWith('/');
+    const segments = currentValue.split('/').filter(segment => segment);
+
+    let newPath: string;
+    if (this.data$.value) {
+      newPath = `${currentValue}${!hasTrailingSlash && segments.length > 0 ? '/' : ''}${path}/`;
+    } else {
+      const indexOfSlash = currentValue.lastIndexOf('/');
+      const basePath = indexOfSlash !== -1 ? currentValue.substring(0, indexOfSlash) : '';
+      newPath = `${basePath}/${path}/`;
     }
+    this.searchInputToDebounce$.next(newPath);
   }
 }
