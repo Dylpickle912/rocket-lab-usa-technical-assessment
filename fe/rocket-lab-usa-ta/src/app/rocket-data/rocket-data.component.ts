@@ -6,6 +6,7 @@ import {RocketService} from "../../shared/services/rocket.service";
 import {DataNode} from "../../shared/models/node.models";
 import {ShavePathsPipe} from "../../shared/pipes/shave-paths.pipe";
 import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-suggestion.pipe";
+import {SuggestionsComponent} from "./suggestions/suggestions.component";
 
 @Component({
   selector: 'app-rocket-data',
@@ -15,7 +16,8 @@ import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-sug
     FormsModule,
     NgForOf,
     ShavePathsPipe,
-    HighlightPathSuggestionPipe
+    HighlightPathSuggestionPipe,
+    SuggestionsComponent
   ],
   templateUrl: './rocket-data.component.html',
   styleUrl: './rocket-data.component.scss',

@@ -6,15 +6,10 @@
 
 <p>Key: {{(data$ | async)?.key ?? 'No Key'}}</p>
 
-<div class="search-results">
-  <div class="item"
-       *ngFor="let path of ((searchPathResults$ | async) ?? [] | shavePaths: (currentPath$ | async) ?? '' : !!(data$ | async))"
-       [innerHTML]="path | highlightPathSuggestion: (searchTermFromPath$ | async) ?? ''"
-       (click)="onSuggestionSelected(path)">
-  </div>
-</div>
-
-<!--
-  Can type path
-  Can select path based off suggestions
--->
+<app-suggestions
+  [suggestionResults]="(searchPathResults$ | async) ?? []"
+  [currentPath]="(currentPath$ | async) ?? ''"
+  [pathIsValid]="!!(data$ | async)"
+  [searchTerm]="(searchTermFromPath$ | async) ?? ''"
+  (emitSuggestionSelected)="onSuggestionSelected($event)">
+</app-suggestions>
