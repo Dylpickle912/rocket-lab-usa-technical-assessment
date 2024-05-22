@@ -1,0 +1,51 @@
+@import 'variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: auto;
+  gap: 0.25rem;
+
+  .header-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    padding: 0.5rem;
+    justify-content: space-between;
+
+    .key {
+      font: {
+        family: mMedium;
+        size: 14px;
+      }
+    }
+
+    .value {
+      font: {
+        family: mRegular;
+        size: 12px;
+      }
+    }
+
+    &.hasChildren {
+      background-color: $elGrey;
+
+      .key,
+      .value {
+        font: {
+          family: mMedium;
+          size: 16px;
+        }
+      }
+    }
+  }
+
+  .children {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+}

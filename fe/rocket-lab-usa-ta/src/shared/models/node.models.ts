@@ -1,8 +1,12 @@
+// Used for creating property rather than node so value is defined
 export interface NodeProperty {
   key: string,
-  value?: number
+  value: number
 }
 
-export interface DataNode extends NodeProperty {
-  children?: (DataNode | NodeProperty)[]
+// Used for data tree
+export interface DataNode {
+  key: string,
+  value?: number,
+  children?: DataNode[]
 }

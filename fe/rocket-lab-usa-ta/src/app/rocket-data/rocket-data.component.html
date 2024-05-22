@@ -22,4 +22,9 @@
   <p class="full-path">Rocket/{{(currentPath$ | async)}}</p>
 
   <p class="result">Key: {{(data$ | async)?.key ?? 'No Key'}}</p>
+
+  <app-rocket-data-node
+    class="nodes"
+    [dataNode]="(data$ | async) ?? undefined">
+  </app-rocket-data-node>
 </div>

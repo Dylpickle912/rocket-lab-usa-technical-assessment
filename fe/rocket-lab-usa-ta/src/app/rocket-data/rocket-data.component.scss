@@ -10,7 +10,8 @@
   grid-template-areas:
     '. path-input suggestions'
     '. full-path suggestions'
-    '. result suggestions';
+    '. result suggestions'
+    '. nodes .';
 
   .path-input {
     grid-area: path-input;
@@ -68,5 +69,13 @@
 
   .result {
     grid-area: result;
+  }
+
+  .nodes {
+    grid-area: nodes;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: auto;
   }
 }

@@ -55,8 +55,7 @@ export class DataService {
   }
 
   public searchPaths(filter: string): string[] {
-    const rows = this.collectPaths(this.data).filter(path => path.toLowerCase().includes(filter.toLowerCase()));
-    return rows;
+    return this.collectPaths(this.data).filter(path => path.toLowerCase().includes(filter.toLowerCase()));
   }
 
   public createNode(path: string, nodeName: string): void {
