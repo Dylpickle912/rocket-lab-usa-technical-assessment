@@ -11,6 +11,7 @@
     '. path-input suggestions'
     '. full-path suggestions'
     '. result suggestions'
+    '. expansion-buttons .'
     '. nodes .';
 
   .path-input {
@@ -69,6 +70,36 @@
 
   .result {
     grid-area: result;
+  }
+
+  .expansionButtons {
+    grid-area: expansion-buttons;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+    button {
+      border: none;
+      outline: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font: {
+        family: mMedium;
+        size: 12px;
+      }
+      color: $white;
+      cursor: pointer;
+
+      &.close-button {
+        background-color: $mGrey;
+      }
+
+      &.open-button {
+        background-color: $blue;
+      }
+    }
   }
 
   .nodes {

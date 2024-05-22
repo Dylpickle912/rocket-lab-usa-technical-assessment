@@ -8,6 +8,7 @@ import {ShavePathsPipe} from "../../shared/pipes/shave-paths.pipe";
 import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-suggestion.pipe";
 import {SuggestionsComponent} from "./suggestions/suggestions.component";
 import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.component";
+import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-rocket-data',
@@ -20,7 +21,8 @@ import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.compo
     HighlightPathSuggestionPipe,
     SuggestionsComponent,
     NgIf,
-    RocketDataNodeComponent
+    RocketDataNodeComponent,
+    MatAccordion
   ],
   templateUrl: './rocket-data.component.html',
   styleUrl: './rocket-data.component.scss',

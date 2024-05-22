@@ -1,9 +1,10 @@
 <div class="container" *ngIf="dataNode; else noData" [title]="currentPath" [ngStyle]="{
-  'padding-left': 10 * currentLayer + 'px',
+  'padding-left': 10 * (currentLayer - 1) + 'px',
 }">
   <app-expansion-panel
     *ngIf="dataNode.children && dataNode.children.length > 0; else noChildren"
-    [expanded]="true">
+    [expanded]="expandChildren"
+    [removeBottomContentPadding]="true">
     <ng-container *ngTemplateOutlet="header" expansionHeader></ng-container>
     <ng-container *ngTemplateOutlet="content" expansionContent></ng-container>
   </app-expansion-panel>
@@ -17,7 +18,7 @@
       'hasChildren': dataNode.children && dataNode.children.length > 0
     }">
       <p class="key">{{dataNode.key}}</p>
-      <p class="value" *ngIf="dataNode.value">{{dataNode.value}}</p>
+      <p class="value" *ngIf="dataNode.value">{{dataNode.value | number: '1.3-3'}}</p>
     </div>
   </ng-template>
 
@@ -27,7 +28,8 @@
         *ngFor="let child of dataNode.children"
         [dataNode]="child"
         [parentLayerIndex]="currentLayer"
-        [parentPath]="currentPath">
+        [parentPath]="currentPath"
+        [expandChildren]="expandChildren">
       </app-rocket-data-node>
     </div>
   </ng-template>

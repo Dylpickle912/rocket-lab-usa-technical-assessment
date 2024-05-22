@@ -23,8 +23,17 @@
 
   <p class="result">Key: {{(data$ | async)?.key ?? 'No Key'}}</p>
 
-  <app-rocket-data-node
+  <div class="expansionButtons">
+    <button type="button" class="close-button" (click)="accordion.closeAll()">Close All</button>
+    <button type="button" class="open-button" (click)="accordion.openAll()">Open All</button>
+  </div>
+  <mat-accordion
     class="nodes"
-    [dataNode]="(data$ | async) ?? undefined">
-  </app-rocket-data-node>
+    #accordion="matAccordion"
+    [multi]="true">
+    <app-rocket-data-node
+      [dataNode]="(data$ | async) ?? undefined"
+      [expandChildren]="true">
+    </app-rocket-data-node>
+  </mat-accordion>
 </div>

@@ -24,6 +24,10 @@
   flex-direction: column;
   width: 100%;
   padding: 1rem 0;
+
+  &.noBottomPadding {
+    padding-bottom: 0;
+  }
 }
 
 .mat-expansion-panel {
