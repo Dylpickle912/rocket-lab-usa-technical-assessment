@@ -5,7 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {RocketService} from "../../shared/services/rocket.service";
 import {DataNode} from "../../shared/models/node.models";
 import {ShavePathsPipe} from "../../shared/pipes/shave-paths.pipe";
-import {HighlightPathSuggestionPipe} from "../../shared/pipes/highlight-path-suggestion.pipe";
+import {BoldPathSuggestionPipe} from "../../shared/pipes/bold-path-suggestion.pipe";
 import {SuggestionsComponent} from "./suggestions/suggestions.component";
 import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.component";
 import {MatAccordion} from "@angular/material/expansion";
@@ -18,7 +18,7 @@ import {MatAccordion} from "@angular/material/expansion";
     FormsModule,
     NgForOf,
     ShavePathsPipe,
-    HighlightPathSuggestionPipe,
+    BoldPathSuggestionPipe,
     SuggestionsComponent,
     NgIf,
     RocketDataNodeComponent,
@@ -91,7 +91,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
     } else {
       const indexOfSlash = currentValue.lastIndexOf('/');
       const basePath = indexOfSlash !== -1 ? currentValue.substring(0, indexOfSlash) : '';
-      newPath = `${basePath}/${path}/`;
+      newPath = `${basePath ? basePath + '/' : ''}${path}/`;
     }
     this.onSearchPathChanged(newPath);
   }

@@ -1,0 +1,22 @@
+@use 'variables';
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+
+  .item {
+    font: {
+      family: mMedium;
+      size: 20px;
+    }
+    color: variables.$lGrey;
+    cursor: pointer;
+    transition: color .2s;
+
+    &:hover {
+      color: variables.$mGrey;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-@import 'fonts';
-@import 'variables';
+@use 'fonts';
+@use 'variables';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 * {
@@ -9,11 +9,22 @@
   font: {
     family: mMedium;
   };
-  color: $black;
+  color: variables.$black;
 }
 
-.highlight {
-  background-color: yellow;
+.bold {
+  color: variables.$dGrey;
+}
+
+.noResults {
+  font: {
+    family: mBold;
+    size: 20px;
+  }
+  color: variables.$black;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 

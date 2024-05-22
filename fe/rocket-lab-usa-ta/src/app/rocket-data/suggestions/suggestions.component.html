@@ -2,7 +2,7 @@
   <ng-container *ngIf="suggestionResults.length > 0; else noSuggestions">
     <div class="item"
          *ngFor="let path of suggestionResults | shavePaths: currentPath : pathIsValid"
-         [innerHTML]="path | highlightPathSuggestion: searchTerm"
+         [innerHTML]="path | boldPathSuggestion: searchTerm"
          (click)="onSuggestionSelected(path)">
     </div>
   </ng-container>

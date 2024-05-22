@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {HighlightPathSuggestionPipe} from "../../../shared/pipes/highlight-path-suggestion.pipe";
+import {BoldPathSuggestionPipe} from "../../../shared/pipes/bold-path-suggestion.pipe";
 import {ShavePathsPipe} from "../../../shared/pipes/shave-paths.pipe";
 
 @Component({
@@ -8,7 +8,7 @@ import {ShavePathsPipe} from "../../../shared/pipes/shave-paths.pipe";
   standalone: true,
   imports: [
     AsyncPipe,
-    HighlightPathSuggestionPipe,
+    BoldPathSuggestionPipe,
     NgForOf,
     ShavePathsPipe,
     NgIf

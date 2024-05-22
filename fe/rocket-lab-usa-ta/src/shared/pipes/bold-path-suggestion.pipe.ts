@@ -1,10 +1,10 @@
 import {Pipe, PipeTransform} from "@angular/core";
 
 @Pipe({
-  name: 'highlightPathSuggestion',
+  name: 'boldPathSuggestion',
   standalone: true
 })
-export class HighlightPathSuggestionPipe implements PipeTransform {
+export class BoldPathSuggestionPipe implements PipeTransform {
   public transform(value: string, lookUp: string = ''): any {
     if (!value || !lookUp) return value;
 
@@ -12,7 +12,7 @@ export class HighlightPathSuggestionPipe implements PipeTransform {
     const search = RegExp(replace, 'gi');
 
     return value.toString().replace(search, (match) => {
-      return `<span class="highlight">${match}</span>`;
+      return `<span class="bold">${match}</span>`;
     });
   }
 }
