@@ -1,20 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RocketDataComponent } from './rocket-data.component';
+import {RocketService} from "../../shared/services/rocket.service";
+import {MatDialog} from "@angular/material/dialog";
 
 describe('RocketDataComponent', () => {
   let component: RocketDataComponent;
-  let fixture: ComponentFixture<RocketDataComponent>;
+  let rocketServiceSpy: jasmine.SpyObj<RocketService>;
+  let dialogSpy: jasmine.SpyObj<MatDialog>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RocketDataComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(RocketDataComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    rocketServiceSpy = jasmine.createSpyObj(RocketService.name, ['searchPaths', 'fetchRocketDetails']);
+    dialogSpy = jasmine.createSpyObj(MatDialog.name, ['open']);
+
+    component = new RocketDataComponent(rocketServiceSpy, dialogSpy);
   });
 
   it('should create', () => {

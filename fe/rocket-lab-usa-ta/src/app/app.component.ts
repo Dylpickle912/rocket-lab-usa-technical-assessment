@@ -10,5 +10,5 @@ import {RocketDataComponent} from "./rocket-data/rocket-data.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Rocket Data';
+
 }
