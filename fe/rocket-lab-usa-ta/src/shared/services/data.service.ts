@@ -65,8 +65,8 @@ export class DataService {
   private findNode(path: string): NodeChild | undefined {
     const parts = path.split('/').filter(part => part);
 
-    if (parts.length === 0 || parts[0] !== 'Rocket') {
-      return undefined;  // Root path should always start with 'Rocket'
+    if (parts.length === 0) {
+      return undefined;
     }
 
     let currentNode: TreeNode | NodeChild | undefined = this.data;
@@ -94,7 +94,7 @@ export class DataService {
     for (let i = 1; i < parts.length; i++) {
       const part = parts[i];
       if (!currentNode || !currentNode.children) {
-        return; // Node not found
+        return;
       }
       parentNode = currentNode;
       currentNode = currentNode.children.find(child => child.key === part);
