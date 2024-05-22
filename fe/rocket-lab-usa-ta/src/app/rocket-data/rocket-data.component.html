@@ -24,6 +24,7 @@
   <p class="full-path">Rocket/{{(currentPath$ | async)}}</p>
 
   <div class="results-container">
+    <button type="button"(click)="onOpenDialog()">Open Dialog</button>
     <div class="expansionButtons" *ngIf="(data$ | async)?.children">
       <button type="button" class="close-button" (click)="accordion.closeAll()">Close All</button>
       <button type="button" class="open-button" (click)="accordion.openAll()">Open All</button>

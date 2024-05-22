@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BehaviorSubject, debounceTime, skip, Subject, Subscription} from "rxjs";
+import {BehaviorSubject, debounceTime, skip, Subscription} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RocketService} from "../../shared/services/rocket.service";
@@ -9,6 +9,8 @@ import {BoldPathSuggestionPipe} from "../../shared/pipes/bold-path-suggestion.pi
 import {SuggestionsComponent} from "./suggestions/suggestions.component";
 import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.component";
 import {MatAccordion} from "@angular/material/expansion";
+import { MatDialog } from '@angular/material/dialog';
+import {DialogComponent} from "../../shared/components/dialog/dialog.component";
 
 @Component({
   selector: 'app-rocket-data',
@@ -22,7 +24,8 @@ import {MatAccordion} from "@angular/material/expansion";
     SuggestionsComponent,
     NgIf,
     RocketDataNodeComponent,
-    MatAccordion
+    MatAccordion,
+    DialogComponent
   ],
   templateUrl: './rocket-data.component.html',
   styleUrl: './rocket-data.component.scss',
@@ -38,7 +41,8 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   public searchPathResults$ = new BehaviorSubject<string[]>([]);
 
   private subscription = new Subscription();
-  constructor(private readonly rocketService: RocketService) { }
+  constructor(private readonly rocketService: RocketService,
+              private readonly dialog: MatDialog) { }
 
   public ngOnInit() {
     this.getData();
@@ -94,5 +98,20 @@ export class RocketDataComponent implements OnInit, OnDestroy {
       newPath = `${basePath ? basePath + '/' : ''}${path}/`;
     }
     this.onSearchPathChanged(newPath);
+  }
+
+  public onOpenDialog(): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Title',
+        message: 'Message',
+        buttonText: 'Confirm',
+        buttonStatus: 'Positive'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Confirmed?', result);
+    });
   }
 }

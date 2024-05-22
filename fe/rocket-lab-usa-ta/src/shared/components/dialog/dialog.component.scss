@@ -1,0 +1,60 @@
+@use 'variables';
+@import '../../../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+.dialog-container {
+  width: 350px;
+  min-height: 250px;
+  height: max-content;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  padding: 2rem;
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+
+    button {
+      border: none;
+      outline: none;
+      padding: 0.5rem 1rem;
+      font: {
+        family: mMedium;
+        size: 14px;
+      }
+      background-color: variables.$elGrey;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color .2s;
+
+      &:focus,
+      &:hover {
+        background-color: darken(variables.$elGrey, 4%);
+      }
+
+      &.resultButton {
+        color: variables.$white;
+      }
+
+      &.status-Positive {
+        background-color: variables.$blue;
+
+        &:focus,
+        &:hover {
+          background-color: darken(variables.$blue, 4%);
+        }
+      }
+
+      &.status-Negative {
+        background-color: variables.$red;
+
+        &:focus,
+        &:hover {
+          background-color: darken(variables.$red, 4%);
+        }
+      }
+    }
+  }
+}
