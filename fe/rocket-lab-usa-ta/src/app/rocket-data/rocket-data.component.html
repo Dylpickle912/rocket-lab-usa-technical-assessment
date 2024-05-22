@@ -7,8 +7,10 @@
       (ngModelChange)="onSearchPathChanged($event)">
     <button class="empty"
             type="button"
-            *ngIf="(searchTermFromPath$ | async)"
-            (click)="onSearchPathChanged('')">&times;</button>
+            *ngIf="(searchInputToDebounce$ | async)"
+            (click)="onSearchPathChanged('')">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
   <app-suggestions
     class="suggestions"
@@ -33,7 +35,8 @@
     [multi]="true">
     <app-rocket-data-node
       [dataNode]="(data$ | async) ?? undefined"
-      [expandChildren]="true">
+      [expandChildren]="true"
+      (emitPathSelected)="onSearchPathChanged($event)">
     </app-rocket-data-node>
   </mat-accordion>
 </div>

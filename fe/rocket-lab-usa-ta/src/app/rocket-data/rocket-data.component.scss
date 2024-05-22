@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables';
 
 .container {
   display: grid;
@@ -26,7 +26,7 @@
       height: 4rem;
       width: 100%;
       text-align: center;
-      background-color: $elGrey;
+      background-color: variables.$elGrey;
       border: none;
       outline: none;
       border-radius: 6px;
@@ -36,15 +36,11 @@
     }
 
     .empty {
-      $blue: #0668e8;
-
       width: 100%;
       aspect-ratio: 1 / 1;
       display: grid;
       place-items: center;
-      font-size: 16px;
-      color: #FFF;
-      background-color: $blue;
+      background-color: variables.$elGrey;
       border-radius: 6px;
       border: none;
       outline: none;
@@ -53,7 +49,12 @@
 
       &:focus,
       &:hover {
-        background-color: darken($blue, 4%);
+        background-color: darken(variables.$elGrey, 4%);
+      }
+
+      i {
+        font-size: 16px;
+        color: variables.$mGrey;
       }
     }
   }
@@ -65,7 +66,7 @@
   .full-path {
     grid-area: full-path;
     text-align: center;
-    color: $lGrey;
+    color: variables.$lGrey;
   }
 
   .result {
@@ -89,15 +90,15 @@
         family: mMedium;
         size: 12px;
       }
-      color: $white;
+      color: variables.$white;
       cursor: pointer;
 
       &.close-button {
-        background-color: $mGrey;
+        background-color: variables.$mGrey;
       }
 
       &.open-button {
-        background-color: $blue;
+        background-color: variables.$blue;
       }
     }
   }

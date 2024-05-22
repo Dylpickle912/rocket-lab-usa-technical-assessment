@@ -61,8 +61,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   }
 
   private setSearchTermFromPath(): void {
-    const term = this.currentPath$.value.split('/').pop() ?? '';
-    this.searchTermFromPath$.next(term);
+    this.searchTermFromPath$.next(this.currentPath$.value.split('/').pop() ?? '');
   }
 
   private setSearchSuggestionResults(): void {
@@ -94,6 +93,6 @@ export class RocketDataComponent implements OnInit, OnDestroy {
       const basePath = indexOfSlash !== -1 ? currentValue.substring(0, indexOfSlash) : '';
       newPath = `${basePath}/${path}/`;
     }
-    this.searchInputToDebounce$.next(newPath);
+    this.onSearchPathChanged(newPath);
   }
 }
