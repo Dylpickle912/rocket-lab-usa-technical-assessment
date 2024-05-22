@@ -23,18 +23,20 @@
 
   <p class="full-path">Rocket/{{(currentPath$ | async)}}</p>
 
-  <div class="expansionButtons">
-    <button type="button" class="close-button" (click)="accordion.closeAll()">Close All</button>
-    <button type="button" class="open-button" (click)="accordion.openAll()">Open All</button>
+  <div class="results-container">
+    <div class="expansionButtons" *ngIf="(data$ | async)?.children">
+      <button type="button" class="close-button" (click)="accordion.closeAll()">Close All</button>
+      <button type="button" class="open-button" (click)="accordion.openAll()">Open All</button>
+    </div>
+    <mat-accordion
+      class="nodes"
+      #accordion="matAccordion"
+      [multi]="true">
+      <app-rocket-data-node
+        [dataNode]="(data$ | async) ?? undefined"
+        [expandChildren]="true"
+        (emitPathSelected)="onSearchPathChanged($event)">
+      </app-rocket-data-node>
+    </mat-accordion>
   </div>
-  <mat-accordion
-    class="nodes"
-    #accordion="matAccordion"
-    [multi]="true">
-    <app-rocket-data-node
-      [dataNode]="(data$ | async) ?? undefined"
-      [expandChildren]="true"
-      (emitPathSelected)="onSearchPathChanged($event)">
-    </app-rocket-data-node>
-  </mat-accordion>
 </div>

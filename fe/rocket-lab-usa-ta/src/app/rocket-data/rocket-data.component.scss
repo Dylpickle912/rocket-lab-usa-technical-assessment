@@ -10,8 +10,7 @@
   grid-template-areas:
     '. path-input suggestions'
     '. full-path suggestions'
-    '. expansion-buttons .'
-    '. nodes .';
+    '. results-container .';
 
   .path-input {
     grid-area: path-input;
@@ -68,41 +67,47 @@
     color: variables.$lGrey;
   }
 
-  .expansionButtons {
-    grid-area: expansion-buttons;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-
-    button {
-      border: none;
-      outline: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font: {
-        family: mMedium;
-        size: 12px;
-      }
-      color: variables.$white;
-      cursor: pointer;
-
-      &.close-button {
-        background-color: variables.$mGrey;
-      }
-
-      &.open-button {
-        background-color: variables.$blue;
-      }
-    }
-  }
-
-  .nodes {
-    grid-area: nodes;
+  .results-container {
+    grid-area: results-container;
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow-x: auto;
+    gap: 1rem;
+
+    .expansionButtons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+
+      button {
+        border: none;
+        outline: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font: {
+          family: mMedium;
+          size: 12px;
+        }
+        color: variables.$white;
+        cursor: pointer;
+
+        &.close-button {
+          background-color: variables.$mGrey;
+        }
+
+        &.open-button {
+          background-color: variables.$blue;
+        }
+      }
+    }
+
+    .nodes {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      overflow-x: auto;
+    }
   }
 }

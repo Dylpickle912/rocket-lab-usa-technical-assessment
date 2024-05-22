@@ -17,7 +17,9 @@
     <div class="header-info" [ngClass]="{
         'hasChildren': dataNode.children && dataNode.children.length > 0
       }">
-      <div class="key"
+      <div class="key" [ngClass]="{
+        'valueOverTen': dataNode.value && dataNode.value > 10
+      }"
         (click)="$event.stopPropagation(); onNavigate()">
         {{dataNode.key}}
       </div>
