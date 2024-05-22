@@ -16,7 +16,7 @@ interface DialogData {
 }
 
 @Component({
-  selector: 'app-confirmation-dialog',
+  selector: 'app-confirmation-confirmation-dialog',
   standalone: true,
   imports: [
     NgIf,

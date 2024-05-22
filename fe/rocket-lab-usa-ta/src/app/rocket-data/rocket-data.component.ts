@@ -10,7 +10,7 @@ import {SuggestionsComponent} from "./suggestions/suggestions.component";
 import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.component";
 import {MatAccordion} from "@angular/material/expansion";
 import { MatDialog } from '@angular/material/dialog';
-import {ConfirmationDialogComponent} from "../../shared/components/dialog/confirmation-dialog.component";
+import {ConfirmationDialogComponent} from "../../shared/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-rocket-data',
