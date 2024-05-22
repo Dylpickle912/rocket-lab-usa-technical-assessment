@@ -12,8 +12,8 @@
     flex-direction: row;
     width: 100%;
     gap: 1rem;
-    padding: 0.5rem;
     justify-content: space-between;
+    padding-right: 1rem;
 
     .key {
       font: {
@@ -30,7 +30,7 @@
     }
 
     &.hasChildren {
-      background-color: $elGrey;
+      padding-right: 0;
 
       .key,
       .value {

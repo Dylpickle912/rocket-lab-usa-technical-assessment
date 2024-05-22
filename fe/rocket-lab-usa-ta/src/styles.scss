@@ -1,5 +1,6 @@
 @import 'fonts';
 @import 'variables';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 * {
   box-sizing: border-box;
@@ -13,4 +14,20 @@
 
 .highlight {
   background-color: yellow;
+}
+
+
+// Override Mat-Expansion-Panel Styles
+.mat-expansion-panel-header {
+  padding: 0 !important;
+}
+
+.mat-content {
+  &.mat-content-hide-toggle {
+    margin: 0 !important;
+  }
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
 }

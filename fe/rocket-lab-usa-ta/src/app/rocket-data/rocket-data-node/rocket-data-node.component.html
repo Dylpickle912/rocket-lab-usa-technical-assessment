@@ -1,19 +1,36 @@
-<div class="container" *ngIf="dataNode; else noData" [ngStyle]="{
+<div class="container" *ngIf="dataNode; else noData" [title]="currentPath" [ngStyle]="{
   'padding-left': 10 * currentLayer + 'px',
 }">
-  <div class="header-info" [ngClass]="{
-    'hasChildren': dataNode.children && dataNode.children.length > 0
-  }">
-    <p class="key">{{dataNode.key}}</p>
-    <p class="value" *ngIf="dataNode.value">{{dataNode.value}}</p>
-  </div>
-  <div class="children" *ngIf="dataNode.children">
-    <app-rocket-data-node
-      *ngFor="let child of dataNode.children"
-      [dataNode]="child"
-      [parentLayerIndex]="currentLayer">
-    </app-rocket-data-node>
-  </div>
+  <app-expansion-panel
+    *ngIf="dataNode.children && dataNode.children.length > 0; else noChildren"
+    [expanded]="true">
+    <ng-container *ngTemplateOutlet="header" expansionHeader></ng-container>
+    <ng-container *ngTemplateOutlet="content" expansionContent></ng-container>
+  </app-expansion-panel>
+
+  <ng-template #noChildren>
+    <ng-container *ngTemplateOutlet="header"></ng-container>
+  </ng-template>
+
+  <ng-template #header>
+    <div class="header-info" [ngClass]="{
+      'hasChildren': dataNode.children && dataNode.children.length > 0
+    }">
+      <p class="key">{{dataNode.key}}</p>
+      <p class="value" *ngIf="dataNode.value">{{dataNode.value}}</p>
+    </div>
+  </ng-template>
+
+  <ng-template #content>
+    <div class="children" *ngIf="dataNode.children">
+      <app-rocket-data-node
+        *ngFor="let child of dataNode.children"
+        [dataNode]="child"
+        [parentLayerIndex]="currentLayer"
+        [parentPath]="currentPath">
+      </app-rocket-data-node>
+    </div>
+  </ng-template>
 </div>
 
 <ng-template #noData>
