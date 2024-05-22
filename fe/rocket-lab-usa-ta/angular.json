@@ -95,9 +95,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/theme.scss"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/styles.scss",
+              "src/theme.scss",
+              "src/variables.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src"
+              ]
+            },
             "scripts": []
           }
         }
