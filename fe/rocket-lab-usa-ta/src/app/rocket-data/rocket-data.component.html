@@ -1,15 +1,25 @@
-<input
-  type="text"
-  placeholder="Search for a node..."
-  [ngModel]="(searchInputToDebounce$ | async)"
-  (ngModelChange)="onSearchPathChanged($event)">
+<div class="container">
+  <div class="path-input">
+    <input
+      type="text"
+      placeholder="Search for a node..."
+      [ngModel]="(searchInputToDebounce$ | async)"
+      (ngModelChange)="onSearchPathChanged($event)">
+    <button class="empty"
+            type="button"
+            *ngIf="(searchTermFromPath$ | async)"
+            (click)="onSearchPathChanged('')">&times;</button>
+  </div>
+  <app-suggestions
+    class="suggestions"
+    [suggestionResults]="(searchPathResults$ | async) ?? []"
+    [currentPath]="(currentPath$ | async) ?? ''"
+    [pathIsValid]="!!(data$ | async)"
+    [searchTerm]="(searchTermFromPath$ | async) ?? ''"
+    (emitSuggestionSelected)="onSuggestionSelected($event)">
+  </app-suggestions>
 
-<p>Key: {{(data$ | async)?.key ?? 'No Key'}}</p>
+  <p class="full-path">Rocket/{{(currentPath$ | async)}}</p>
 
-<app-suggestions
-  [suggestionResults]="(searchPathResults$ | async) ?? []"
-  [currentPath]="(currentPath$ | async) ?? ''"
-  [pathIsValid]="!!(data$ | async)"
-  [searchTerm]="(searchTermFromPath$ | async) ?? ''"
-  (emitSuggestionSelected)="onSuggestionSelected($event)">
-</app-suggestions>
+  <p class="result">Key: {{(data$ | async)?.key ?? 'No Key'}}</p>
+</div>

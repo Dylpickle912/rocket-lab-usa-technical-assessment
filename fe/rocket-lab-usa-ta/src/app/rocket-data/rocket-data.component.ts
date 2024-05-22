@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, debounceTime, skip, Subject, Subscription} from "rxjs";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RocketService} from "../../shared/services/rocket.service";
 import {DataNode} from "../../shared/models/node.models";
@@ -17,7 +17,8 @@ import {SuggestionsComponent} from "./suggestions/suggestions.component";
     NgForOf,
     ShavePathsPipe,
     HighlightPathSuggestionPipe,
-    SuggestionsComponent
+    SuggestionsComponent,
+    NgIf
   ],
   templateUrl: './rocket-data.component.html',
   styleUrl: './rocket-data.component.scss',
@@ -69,7 +70,6 @@ export class RocketDataComponent implements OnInit, OnDestroy {
 
   public getData(path?: string): void {
     this.data$.next(this.rocketService.fetchRocketDetails(path));
-    console.log('Data:', this.data$.value);
   }
 
   public onSuggestionSelected(path: string): void {

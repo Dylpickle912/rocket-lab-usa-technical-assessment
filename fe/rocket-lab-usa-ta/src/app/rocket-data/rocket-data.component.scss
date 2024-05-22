@@ -1,0 +1,71 @@
+@use 'variables';
+
+.container {
+  display: grid;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 2rem;
+  grid-template-columns: minmax(0, 0.25fr) minmax(0, 0.5fr) minmax(0, 0.25fr);
+  grid-template-rows: max-content;
+  grid-template-areas:
+    '. path-input suggestions'
+    '. full-path suggestions'
+    '. result suggestions';
+
+  .path-input {
+    grid-area: path-input;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2rem;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+
+    input {
+      height: 4rem;
+      width: 100%;
+      text-align: center;
+      background-color: variables.$lGrey;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      font: {
+        size: 18px;
+      }
+    }
+
+    .empty {
+      $blue: #0668e8;
+
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      color: #FFF;
+      background-color: $blue;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: background-color .2s;
+
+      &:focus,
+      &:hover {
+        background-color: darken($blue, 4%);
+      }
+    }
+  }
+
+  .suggestions {
+    grid-area: suggestions;
+  }
+
+  .full-path {
+    grid-area: full-path;
+    text-align: center;
+  }
+
+  .result {
+    grid-area: result;
+  }
+}
