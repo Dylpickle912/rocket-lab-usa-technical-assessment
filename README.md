@@ -38,3 +38,9 @@ Seed Data
         - "Engine1"
             - "Thrust": 1.622
             - "ISP": 15.110
+
+
+Questions & Concerns
+------------------------------------
+
+- When looking at the Seed Data, I noticed Stage1 and Stage2 are not encapsulated inside an array. Due to this, I am led to believe they are constant for each Rocket. However, looking at the second bullet point in the instructions, it is inferred that there are no requirements for how many children a parent can have and they can have any type. In this case, Stages[n] would not need to be encapsulated within an array.
