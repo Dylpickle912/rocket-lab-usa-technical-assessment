@@ -16,7 +16,7 @@ interface DialogData {
 }
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-confirmation-dialog',
   standalone: true,
   imports: [
     NgIf,
@@ -25,16 +25,16 @@ interface DialogData {
     MatDialogActions,
     MatDialogModule
   ],
-  templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.scss'
+  templateUrl: './confirmation-dialog.component.html',
+  styleUrl: './confirmation-dialog.component.scss'
 })
-export class DialogComponent {
+export class ConfirmationDialogComponent {
   public title?: string;
   public message?: string;
   public buttonText: string = 'Ok';
   public buttonStatus: 'Positive' | 'Negative' = 'Positive';
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>,
+  constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     if (this.data.title) this.title = this.data.title;
     if (this.data.message) this.message = this.data.message;

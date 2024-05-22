@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogComponent } from './dialog.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 import {NgClass, NgIf} from "@angular/common";
 import {
   MAT_DIALOG_DATA,
@@ -11,19 +11,19 @@ import {
 } from "@angular/material/dialog";
 
 describe('DialogComponent', () => {
-  let component: DialogComponent;
-  let fixture: ComponentFixture<DialogComponent>;
+  let component: ConfirmationDialogComponent;
+  let fixture: ComponentFixture<ConfirmationDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogComponent,
+      imports: [ConfirmationDialogComponent,
         NgIf,
         NgClass,
         MatDialogContent,
         MatDialogActions,
         MatDialogModule],
       providers: [
-        { provide: MatDialogRef, useValue: jasmine.createSpyObj<MatDialogRef<DialogComponent>>(MatDialogRef.name, ['close']) },
+        { provide: MatDialogRef, useValue: jasmine.createSpyObj<MatDialogRef<ConfirmationDialogComponent>>(MatDialogRef.name, ['close']) },
         { provide: MAT_DIALOG_DATA, useValue: {
             title: 'Dialog Data',
             message: 'Message',
@@ -35,7 +35,7 @@ describe('DialogComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DialogComponent);
+    fixture = TestBed.createComponent(ConfirmationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

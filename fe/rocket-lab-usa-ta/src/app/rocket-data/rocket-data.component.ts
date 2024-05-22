@@ -10,7 +10,7 @@ import {SuggestionsComponent} from "./suggestions/suggestions.component";
 import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.component";
 import {MatAccordion} from "@angular/material/expansion";
 import { MatDialog } from '@angular/material/dialog';
-import {DialogComponent} from "../../shared/components/dialog/dialog.component";
+import {ConfirmationDialogComponent} from "../../shared/components/dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-rocket-data',
@@ -25,7 +25,7 @@ import {DialogComponent} from "../../shared/components/dialog/dialog.component";
     NgIf,
     RocketDataNodeComponent,
     MatAccordion,
-    DialogComponent
+    ConfirmationDialogComponent
   ],
   templateUrl: './rocket-data.component.html',
   styleUrl: './rocket-data.component.scss',
@@ -102,7 +102,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   }
 
   public onOpenDialog(): void {
-    let dialogRef = this.dialog.open(DialogComponent, {
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         title: 'Title',
         message: 'Message',
