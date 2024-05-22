@@ -43,11 +43,27 @@ export class DataService {
     ]
   }
 
+  private collectPaths(node: DataNode, path: string = '', paths: string[] = []): string[] {
+    const currentPath = path ? `${path}/${node.key}` : node.key;
+    paths.push(currentPath);
+
+    if (!node.children) return paths;
+    for (const child of node.children) {
+      this.collectPaths(child, currentPath, paths);
+    }
+    return paths;
+  }
+
+  public searchPaths(filter: string): string[] {
+    const rows = this.collectPaths(this.data).filter(path => path.toLowerCase().includes(filter.toLowerCase()));
+    return rows;
+  }
+
   public createNode(path: string, nodeName: string): void {
     const parentNode = this.findNode(path);
     if (!parentNode) return;
     if (!parentNode.children) parentNode.children = [];
-    if (parentNode.children.find(child => child.key === nodeName)) throw new Error('Node Already Exists');
+    if (parentNode.children.find(child => child.key === nodeName)) return;
     parentNode.children.push({ key: nodeName });
   }
 

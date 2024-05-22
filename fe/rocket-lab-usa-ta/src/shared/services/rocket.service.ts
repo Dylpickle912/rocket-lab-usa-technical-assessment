@@ -13,6 +13,10 @@ export class RocketService {
     return this.dataService.getSubtree(this.returnPath(path));
   }
 
+  public searchPaths(search: string = ''): string[] {
+    return this.dataService.searchPaths(search);
+  }
+
   public addNode(key: string, path?: string): void {
     this.dataService.createNode(this.returnPath(path), key);
   }
@@ -26,6 +30,6 @@ export class RocketService {
   }
 
   private returnPath(path?: string): string {
-    return '/Rocket' + path;
+    return '/Rocket' + (path ? `/${path}` : '');
   }
 }

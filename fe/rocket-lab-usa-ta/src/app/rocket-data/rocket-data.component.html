@@ -1,0 +1,11 @@
+<input
+  type="text"
+  placeholder="Search for a node..."
+  [ngModel]="(searchPath$ | async)"
+  (ngModelChange)="onSearchPathChanged($event)">
+
+<p>{{(data$ | async)?.key ?? 'No Key'}}</p>
+
+<div class="search-results">
+  <div class="item" *ngFor="let path of (searchPathResults$ | async)">{{path}}</div>
+</div>
