@@ -34,8 +34,10 @@
       #accordion="matAccordion"
       [multi]="true">
       <app-rocket-data-node
-        [dataNode]="(data$ | async) ?? undefined"
+        *ngIf="data$ | async as data"
+        [dataNode]="data"
         [expandChildren]="true"
+        [currentSearch]="(currentPath$ | async) ?? ''"
         (emitPathSelected)="onSearchPathChanged($event)">
       </app-rocket-data-node>
     </mat-accordion>

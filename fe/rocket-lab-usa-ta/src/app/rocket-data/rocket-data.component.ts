@@ -82,6 +82,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
 
   public getData(path?: string): void {
     this.data$.next(this.rocketService.fetchRocketDetails(path));
+    console.log('Data:', this.data$.value);
   }
 
   public onSuggestionSelected(path: string): void {
