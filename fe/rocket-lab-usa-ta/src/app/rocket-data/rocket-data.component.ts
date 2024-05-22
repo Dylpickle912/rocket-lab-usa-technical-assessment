@@ -78,28 +78,6 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   }
 
   public onSuggestionSelected(path: string): void {
-    /*
-      Case 1: Rocket/Stage1/Engine1
-      Data = true;
-      - Check for / at the end
-      - If not there, add it and append selected path
-
-      Case 2: Rocket/Stage1/en
-      Data = false;
-      - Get index of last /
-      - Remove all characters after index of /
-      - Append the selected path
-     */
-
-    /*if (this.data$.value) {
-      const newPath = `${this.searchInputToDebounce$.value}${this.currentPath$.value.endsWith('/') ? '' : '/'}${path}`;
-      this.searchInputToDebounce$.next(newPath);
-    } else {
-      const indexOfSlash = this.searchInputToDebounce$.value.lastIndexOf('/');
-      const removedPath = this.searchInputToDebounce$.value.substring(0, indexOfSlash);
-      this.searchInputToDebounce$.next(`${removedPath}${(indexOfSlash !== -1 ? '/' : '')}${path}`);
-    }*/
-
     const currentValue = this.searchInputToDebounce$.value;
     const hasTrailingSlash = currentValue.endsWith('/');
     const segments = currentValue.split('/').filter(segment => segment);
