@@ -16,6 +16,11 @@
 
   .arrow {
     grid-area: arrow;
+    transition: transform .2s;
+
+    &.expanded {
+      transform: rotateZ(-180deg);
+    }
   }
 }
 

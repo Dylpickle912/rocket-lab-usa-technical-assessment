@@ -7,7 +7,9 @@
       <div class="headerContent">
         <ng-content select="[expansionHeader]"></ng-content>
       </div>
-      <div class="arrow">
+      <div class="arrow" [ngClass]="{
+        'expanded': expanded
+      }">
         <i class="fa-solid fa-angle-down"></i>
       </div>
     </div>
