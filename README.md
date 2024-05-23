@@ -191,3 +191,14 @@ The `ConfirmationDialogComponent` provides a `MatDialog` interface for displayin
 **Overview**
 
 The `ExpansionPanelComponent` is a custom Angular component that wraps Angular Material's `mat-expansion-panel`, providing additional functionality such as toggling expansion state and providing custom attribute directives to insert custom elements into the header or content sections using the `[expansionHeader]` and `[expansionContent]` directives
+
+
+
+
+## Pipes
+
+### BoldPathSuggestionPipe
+
+**Overview**
+
+The `BoldPathSuggestionPipe` is a custom Angular pipe designed to highlight search terms within a string by wrapping them in a `<span>` element with the class `.bold`. This is useful for visually emphasizing matching text in search results or suggestions.
