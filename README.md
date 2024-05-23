@@ -182,4 +182,12 @@ The `ConfirmationDialogComponent` provides a `MatDialog` interface for displayin
   - `onCancel()`
     - Closes the dialog and returns `false`, indicating the user cancelled the action
   - `onConfirm()`
-    - Closes teh dialog and returns `true`, indicating the user confirmed the action
+    - Closes the dialog and returns `true`, indicating the user confirmed the action
+
+
+
+### ExpansionPanelComponent
+
+**Overview**
+
+The `ExpansionPanelComponent` is a custom Angular component that wraps Angular Material's `mat-expansion-panel`, providing additional functionality such as toggling expansion state and providing custom attribute directives to insert custom elements into the header or content sections using the `[expansionHeader]` and `[expansionContent]` directives
