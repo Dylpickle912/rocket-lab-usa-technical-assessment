@@ -78,7 +78,7 @@ backend service**
 
  ## Components
 
-### RocketDataComponent
+### RocketDataComponent (Component A)
 
 **Overview**
 
@@ -90,3 +90,11 @@ The `RocketDataComponent` is designed to manage and display data from the `Rocke
 **Overview**
 
 The `SuggestionsComponent` takes in all paths from the data structure that are immediate children of the current path. It utilizes the `ShavePathPipe` in the template to take the full path, compare it to the current valid path, and remove all unnecessary paths to only get the next immediate child. The component also takes in the current search input from the `RocketDataComponent` and utilizes the `BoldPipe` to bold letters in the results of the suggestions that match the search.
+
+
+
+### RocketDataNodeComponent (Component B)
+
+**Overview**
+
+The `RocketDataNodeComponent` represents a data node in a hierarchical structure. It provides functionalities for navigating, adding, deleting nodes, and displaying node details using recursive nested expansion panels. This component takes in an instance of a `DataNode` as one of its `Input()`s. Since the `DataNode` interface is recursive in itself, where it holds an optional `Children` property of type `DataNode[]`. Due to this, if there are existing children inside this `DataNode`, this component is recursively called inside its `ExpansionPanel` content. This provides the visual structure to look like a nested tree. Within this recursive functionality, we are provided a simple way to select the Key of any node and emit that up to our search input, thus, click navigation of the hierarchy is achieved. Along with displaying the data, as requested in the `Component B` instructions, an `ngClass` directive is added on the Key that adds the `.valueOverTen` class to change the color of the key's text to green. Also as instructed, this component contains a method to open the `AddNodeDialogComponent` to utilize the RocketService's ability to add Nodes and Properties to the current path. Another method is used to open the `ConfirmationDialogComponent` to utilize the RocketService's ability to delete node structures by passing in the current path upon confirmation.
