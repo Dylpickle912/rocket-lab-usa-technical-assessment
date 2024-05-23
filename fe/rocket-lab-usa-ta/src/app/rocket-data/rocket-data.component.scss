@@ -12,11 +12,25 @@
     '. full-path suggestions'
     '. results-container .';
 
+  @media only screen and (max-width: variables.$mobileBreakpoint) {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 0.3fr);
+    grid-template-rows: 5rem 3rem max-content;
+    grid-template-areas:
+      'path-input suggestions'
+      'full-path suggestions'
+      'results-container results-container';
+
+    .suggestions {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
   .path-input {
     grid-area: path-input;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 2rem;
-    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
     align-items: center;
     width: 100%;
 
@@ -34,7 +48,8 @@
     }
 
     .empty {
-      width: 100%;
+      width: max-content;
+      padding: 0.5rem;
       aspect-ratio: 1 / 1;
       display: grid;
       place-items: center;

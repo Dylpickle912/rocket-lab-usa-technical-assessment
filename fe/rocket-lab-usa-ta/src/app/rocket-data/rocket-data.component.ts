@@ -9,7 +9,6 @@ import {BoldPathSuggestionPipe} from "../../shared/pipes/bold-path-suggestion.pi
 import {SuggestionsComponent} from "./suggestions/suggestions.component";
 import {RocketDataNodeComponent} from "./rocket-data-node/rocket-data-node.component";
 import {MatAccordion} from "@angular/material/expansion";
-import { MatDialog } from '@angular/material/dialog';
 import {ConfirmationDialogComponent} from "../../shared/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
@@ -41,13 +40,16 @@ export class RocketDataComponent implements OnInit, OnDestroy {
   public searchPathResults$ = new BehaviorSubject<string[]>([]);
 
   private subscription = new Subscription();
-  constructor(private readonly rocketService: RocketService,
-              private readonly dialog: MatDialog) { }
+  constructor(private readonly rocketService: RocketService) { }
 
   public ngOnInit() {
-    this.getData();
-    this.setSearchSuggestionResults();
+    this.initializeData();
     this._subscribeToSearch();
+  }
+
+  private initializeData(path?: string): void {
+    this.getData(path);
+    this.setSearchSuggestionResults();
   }
 
   private _subscribeToSearch(): void {
@@ -100,22 +102,7 @@ export class RocketDataComponent implements OnInit, OnDestroy {
     this.onSearchPathChanged(newPath);
   }
 
-  public onOpenDialog(): void {
-    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        title: 'Title',
-        message: 'Message',
-        buttonText: 'Confirm',
-        buttonStatus: 'Positive'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Confirmed?', result);
-    });
-  }
-
   public onRefreshData(): void {
-    this.getData(this.currentPath$.value);
+    this.initializeData(this.currentPath$.value);
   }
 }
