@@ -43,8 +43,6 @@ backend service**
 
 
 
-
-
 # App Instructions
 
 - Create a new Angular CLI project
@@ -83,6 +81,34 @@ backend service**
 **Overview**
 
 The `RocketDataComponent` is designed to manage and display data from the `RocketService`. It includes functionalities for searching, displaying suggestions, and managing data related to search paths. It utilizes RxJS to handle search input debouncing and data updates efficiently. The template provides a UI for inputting search paths, viewing suggestions, and displaying the tree of data nodes.
+
+
+**Functions**
+
+ - Public Methods
+   - `onSearchPathChanged(path: string)`
+     - Updates the search input with the given path
+   - `getData(path?: string)`
+     - Fetches data from the `RocketService`'s `fetchRocketDetails()` for the given path
+   - `onSuggestedSeleced(path: string)`
+     - Appends the current search path input based on the suggested selection
+   - `onRefreshData()`
+     - Calls `initializeData()` with the current path to refresh the current data
+
+ - Private Methods
+   - `initializeData(path?: string)`
+     - Retrieves the data from the `RocketService` using a given path
+     - Sets the search suggestion results based on the current path
+   - `_subscribeToSearch()`
+     - Subscribes to the search input and debounces the value 200ms.
+     - Retrieves the data from the `RocketService` based on the current path
+     - Retrieves the search suggestions based on the current path
+   - `getSearchTermFromPath()`
+     - Gets the last segment of the current search path input and sends it into the `SuggestionsComponent` as the search term for the suggestion results bold pipe
+   - `getSearchSuggestionResults()`
+     - Retrieves the paths for all immediate children of the current path
+
+
 
 
 ### SuggestionsComponent
