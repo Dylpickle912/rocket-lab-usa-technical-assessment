@@ -1,0 +1,24 @@
+<mat-expansion-panel
+  [expanded]="expanded"
+  [hideToggle]="true">
+  <mat-expansion-panel-header
+    (click)="expanded = !expanded">
+    <div class="expansionPanelHeader">
+      <div class="headerContent">
+        <ng-content select="[expansionHeader]"></ng-content>
+      </div>
+      <div class="arrow" [ngClass]="{
+        'expanded': expanded
+      }">
+        <i class="fa-solid fa-angle-down"></i>
+      </div>
+    </div>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <div class="content" [ngClass]="{
+      'noBottomPadding': removeBottomContentPadding
+    }">
+      <ng-content select="[expansionContent]"></ng-content>
+    </div>
+  </ng-template>
+</mat-expansion-panel>

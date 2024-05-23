@@ -1,0 +1,42 @@
+@import 'variables';
+
+.expansionPanelHeader {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: max-content;
+  grid-template-areas: 'header-content arrow';
+  background-color: $elGrey;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+
+  .headerContent {
+    grid-area: header-content;
+  }
+
+  .arrow {
+    grid-area: arrow;
+    transition: transform .2s;
+
+    &.expanded {
+      transform: rotateZ(-180deg);
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem 0;
+
+  &.noBottomPadding {
+    padding-bottom: 0;
+  }
+}
+
+.mat-expansion-panel {
+  &:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+  }
+}

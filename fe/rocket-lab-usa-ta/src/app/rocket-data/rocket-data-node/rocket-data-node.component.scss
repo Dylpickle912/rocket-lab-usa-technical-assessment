@@ -1,0 +1,147 @@
+@use 'variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 0.25rem;
+  position: relative;
+
+  .navigate {
+    display: grid;
+    width: max-content;
+    aspect-ratio: 1 / 1;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: variables.$elGrey;
+    box-shadow: variables.$shadow;
+  }
+
+  .header-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    justify-content: space-between;
+    padding-right: 1rem;
+
+    &:hover {
+      .key-container {
+        .contextMenu {
+          display: flex;
+        }
+      }
+    }
+
+    .key-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+
+      .key {
+        font: {
+          family: mMedium;
+          size: 14px;
+        }
+        cursor: pointer;
+
+        &.valueOverTen {
+          color: variables.$green;
+        }
+
+        &:hover {
+          text-decoration: underline;
+          color: variables.$blue;
+        }
+      }
+
+      .created {
+        font: {
+          family: mRegular;
+          size: 10px;
+        }
+        color: variables.$lGrey;
+      }
+
+      .contextMenu {
+        display: none;
+        flex-direction: row;
+        gap: 0.5rem;
+        width: max-content;
+        padding: 0.25rem;
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 1rem);
+        transform: translateY(-50%);
+
+        button {
+          width: max-content;
+          height: max-content;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          cursor: pointer;
+
+          i {
+            font-size: 12px;
+            color: variables.$mGrey;
+            transition: color .2s;
+          }
+
+          &.positive {
+            &:hover,
+            &:focus {
+              i {
+                color: variables.$blue;
+              }
+            }
+          }
+
+          &.negative {
+            &:hover,
+            &:focus {
+              i {
+                color: variables.$red;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .value {
+      font: {
+        family: mRegular;
+        size: 12px;
+      }
+    }
+
+    &.hasChildren {
+      padding-right: 0;
+
+      .key {
+        font: {
+          family: mBoldItalic;
+        }
+      }
+
+      .value {
+        font: {
+          family: mMedium;
+          size: 16px;
+        }
+      }
+    }
+  }
+
+  .children {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,67 @@
+<div class="container" *ngIf="dataNode; else noData" [title]="currentPath" [ngStyle]="{
+  'padding-left': 10 * (currentLayer - 1) + 'px',
+}">
+  <app-expansion-panel
+    *ngIf="!dataNode.value || (dataNode.children ?? []).length > 0; else isProperty"
+    [expanded]="expandChildren"
+    [removeBottomContentPadding]="true">
+    <ng-container *ngTemplateOutlet="header" expansionHeader></ng-container>
+    <ng-container *ngTemplateOutlet="content" expansionContent></ng-container>
+  </app-expansion-panel>
+
+  <ng-template #isProperty>
+    <ng-container *ngTemplateOutlet="header"></ng-container>
+  </ng-template>
+
+  <ng-template #header>
+    <div class="header-info" [ngClass]="{
+        'hasChildren': dataNode.children && dataNode.children.length > 0
+      }">
+      <div class="key-container">
+        <p class="key"
+           [ngClass]="{
+              'valueOverTen': dataNode.value && dataNode.value > 10
+            }"
+           (click)="$event.stopPropagation(); onNavigate()">
+          {{dataNode.key}}
+        </p>
+        <div class="created">{{dataNode.createdDate | timeSinceCreation}}</div>
+        <div class="contextMenu">
+          <button type="button" class="positive" title="Add Node"
+            (click)="$event.stopPropagation(); onOpenAddDialog()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button type="button" class="negative" title="Delete Node"
+                  *ngIf="currentPath"
+                  (click)="$event.stopPropagation(); onOpenDeleteDialog()">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+      <p class="value" *ngIf="dataNode.value">{{dataNode.value | number: '1.3-3'}}</p>
+    </div>
+  </ng-template>
+
+  <ng-template #content>
+    <div class="children" *ngIf="dataNode.children; else noChildren">
+      <app-rocket-data-node
+        *ngFor="let child of dataNode.children"
+        [dataNode]="child"
+        [parentLayerIndex]="currentLayer"
+        [parentPath]="currentPath"
+        [expandChildren]="expandChildren"
+        [currentSearch]="currentSearch"
+        (emitPathSelected)="emitPathSelected.emit($event)"
+        (emitRefreshData)="emitRefreshData.emit()">
+      </app-rocket-data-node>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #noData>
+  <p class="noResults">No Results</p>
+</ng-template>
+
+<ng-template #noChildren>
+  <p class="noResults">No Children</p>
+</ng-template>

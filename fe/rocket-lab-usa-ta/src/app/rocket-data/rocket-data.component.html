@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="path-input">
+    <input
+      type="text"
+      placeholder="Search for a node..."
+      [ngModel]="(searchInputToDebounce$ | async)"
+      (ngModelChange)="onSearchPathChanged($event)">
+    <button class="empty"
+            type="button"
+            title="Clear Search"
+            *ngIf="(searchInputToDebounce$ | async)"
+            (click)="onSearchPathChanged('')">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <app-suggestions
+    class="suggestions"
+    [suggestionResults]="(searchPathResults$ | async) ?? []"
+    [currentPath]="(currentPath$ | async) ?? ''"
+    [pathIsValid]="!!(data$ | async)"
+    [searchTerm]="(searchTermFromPath$ | async) ?? ''"
+    (emitSuggestionSelected)="onSuggestionSelected($event)">
+  </app-suggestions>
+
+  <p class="full-path">Rocket/{{(currentPath$ | async)}}</p>
+
+  <div class="results-container">
+    <div class="expansionButtons" *ngIf="(data$ | async)?.children">
+      <button type="button" class="close-button" (click)="accordion.closeAll()">Close All</button>
+      <button type="button" class="open-button" (click)="accordion.openAll()">Open All</button>
+    </div>
+    <mat-accordion
+      class="nodes"
+      #accordion="matAccordion"
+      [multi]="true">
+      <app-rocket-data-node
+        *ngIf="data$ | async as data"
+        [dataNode]="data"
+        [expandChildren]="true"
+        [currentSearch]="(currentPath$ | async) ?? ''"
+        (emitPathSelected)="onSearchPathChanged($event)"
+        (emitRefreshData)="onRefreshData()">
+      </app-rocket-data-node>
+    </mat-accordion>
+  </div>
+</div>

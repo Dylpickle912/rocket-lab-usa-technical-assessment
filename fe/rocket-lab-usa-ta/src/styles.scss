@@ -1,0 +1,50 @@
+@use 'fonts';
+@use 'variables';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font: {
+    family: mMedium;
+  };
+  color: variables.$black;
+}
+
+.bold {
+  color: variables.$dGrey;
+}
+
+.noResults {
+  font: {
+    family: mBold;
+    size: 20px;
+  }
+  color: variables.$lGrey;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  @media only screen and (max-width: variables.$mobileBreakpoint) {
+    font: {
+      size: 16px;
+    }
+  }
+}
+
+
+// Override Mat-Expansion-Panel Styles
+.mat-expansion-panel-header {
+  padding: 0 !important;
+}
+
+.mat-content {
+  &.mat-content-hide-toggle {
+    margin: 0 !important;
+  }
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}

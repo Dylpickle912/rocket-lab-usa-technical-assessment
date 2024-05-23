@@ -1,0 +1,18 @@
+<div class="dialog-container">
+  <h1 class="title">Add Node</h1>
+  <p>Add a new node or property.</p>
+  <div class="form-container">
+    <div class="input-field">
+      <p class="label">Key *</p>
+      <input type="text" [(ngModel)]="key">
+    </div>
+    <div class="input-field">
+      <p class="label">Value</p>
+      <input type="number" [(ngModel)]="value">
+    </div>
+  </div>
+  <div class="buttons">
+    <button type="button" (click)="onCancel()">Cancel</button>
+    <button type="button" class="resultButton status-Positive" (click)="onConfirm()">Save</button>
+  </div>
+</div>

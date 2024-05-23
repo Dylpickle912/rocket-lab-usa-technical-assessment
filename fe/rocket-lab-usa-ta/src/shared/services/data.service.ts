@@ -7,35 +7,38 @@ import {DataNode, NodeProperty} from "../models/node.models";
 export class DataService {
   private data: DataNode = {
     key: 'Rocket',
+    createdDate: new Date(),
     children: [
-      { key: 'Height', value: 18.000 },
-      { key: 'Mass', value: 12000.000 },
+      { key: 'Height', value: 18.000, createdDate: new Date() },
+      { key: 'Mass', value: 12000.000, createdDate: new Date() },
       {
         key: 'Stage1',
+        createdDate: new Date(),
         children: [
-          { key: 'Engine1', children: [
-              { key: 'Thrust', value: 9.493 },
-              { key: 'ISP', value: 12.156 }
+          { key: 'Engine1', createdDate: new Date(), children: [
+              { key: 'Thrust', value: 9.493, createdDate: new Date() },
+              { key: 'ISP', value: 12.156, createdDate: new Date() }
             ]
           },
-          { key: 'Engine2', children: [
-              { key: 'Thrust', value: 9.413 },
-              { key: 'ISP', value: 11.632 }
+          { key: 'Engine2', createdDate: new Date(), children: [
+              { key: 'Thrust', value: 9.413, createdDate: new Date() },
+              { key: 'ISP', value: 11.632, createdDate: new Date() }
             ]
           },
-          { key: 'Engine3', children: [
-              { key: 'Thrust', value: 9.899 },
-              { key: 'ISP', value: 12.551 }
+          { key: 'Engine3', createdDate: new Date(), children: [
+              { key: 'Thrust', value: 9.899, createdDate: new Date() },
+              { key: 'ISP', value: 12.551, createdDate: new Date() }
             ]
           }
         ]
       },
       {
         key: 'Stage2',
+        createdDate: new Date(),
         children: [
-          { key: 'Engine1', children: [
-              { key: 'Thrust', value: 1.622 },
-              { key: 'ISP', value: 15.110 }
+          { key: 'Engine1', createdDate: new Date(), children: [
+              { key: 'Thrust', value: 1.622, createdDate: new Date() },
+              { key: 'ISP', value: 15.110, createdDate: new Date() }
             ]
           }
         ]
@@ -43,19 +46,44 @@ export class DataService {
     ]
   }
 
+  private collectPaths(node: DataNode, path: string = '', paths: string[] = []): string[] {
+    const currentPath = path ? `${path}/${node.key}` : node.key;
+    paths.push(currentPath);
+
+    if (!node.children) return paths;
+    for (const child of node.children) {
+      this.collectPaths(child, currentPath, paths);
+    }
+    return paths;
+  }
+
+  public searchPaths(filter: string): string[] {
+    return this.collectPaths(this.data).filter(path => path.toLowerCase().includes(filter.toLowerCase()));
+  }
+
   public createNode(path: string, nodeName: string): void {
     const parentNode = this.findNode(path);
     if (!parentNode) return;
     if (!parentNode.children) parentNode.children = [];
-    if (parentNode.children.find(child => child.key === nodeName)) throw new Error('Node Already Exists');
-    parentNode.children.push({ key: nodeName });
+    if (parentNode.children.find(child => child.key === nodeName)) {
+      window.alert('A node with this key already exists.');
+      return;
+    }
+    parentNode.children.push({ key: nodeName, createdDate: new Date() });
   }
 
   public addProperty(path: string, property: NodeProperty): void {
     const node = this.findNode(path);
     if (!node) return;
     if (!node.children) node.children = [];
-    node.children.push(property);
+    if (node.children.find(child => child.key === property.key)) {
+      window.alert('A property with this key already exists.');
+      return;
+    }
+    node.children.push({
+      ...property,
+      createdDate: new Date()
+    });
   }
 
   public getSubtree(path: string): DataNode | undefined {
@@ -76,7 +104,7 @@ export class DataService {
       if (!currentNode || !currentNode.children) {
         return undefined;
       }
-      currentNode = currentNode.children.find(child => child.key === part);
+      currentNode = currentNode.children.find(child => child.key.toLowerCase() === part.toLowerCase());
     }
     return currentNode as DataNode | undefined;
   }

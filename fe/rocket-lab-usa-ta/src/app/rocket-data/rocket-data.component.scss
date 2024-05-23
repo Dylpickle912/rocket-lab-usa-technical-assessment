@@ -1,0 +1,128 @@
+@use 'variables';
+
+.container {
+  display: grid;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 2rem;
+  grid-template-columns: minmax(0, 0.25fr) minmax(0, 0.5fr) minmax(0, 0.25fr);
+  grid-template-rows: max-content;
+  grid-template-areas:
+    '. path-input suggestions'
+    '. full-path suggestions'
+    '. results-container .';
+
+  @media only screen and (max-width: variables.$mobileBreakpoint) {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 0.3fr);
+    grid-template-rows: 5rem 3rem max-content;
+    grid-template-areas:
+      'path-input suggestions'
+      'full-path suggestions'
+      'results-container results-container';
+
+    .suggestions {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
+  .path-input {
+    grid-area: path-input;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+
+    input {
+      height: 4rem;
+      width: 100%;
+      text-align: center;
+      background-color: variables.$elGrey;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      font: {
+        size: 18px;
+      }
+    }
+
+    .empty {
+      width: max-content;
+      padding: 0.5rem;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      background-color: variables.$elGrey;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: background-color .2s;
+
+      &:focus,
+      &:hover {
+        background-color: darken(variables.$elGrey, 4%);
+      }
+
+      i {
+        font-size: 16px;
+        color: variables.$mGrey;
+      }
+    }
+  }
+
+  .suggestions {
+    grid-area: suggestions;
+  }
+
+  .full-path {
+    grid-area: full-path;
+    text-align: center;
+    color: variables.$lGrey;
+  }
+
+  .results-container {
+    grid-area: results-container;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+
+    .expansionButtons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+
+      button {
+        border: none;
+        outline: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font: {
+          family: mMedium;
+          size: 12px;
+        }
+        color: variables.$white;
+        cursor: pointer;
+
+        &.close-button {
+          background-color: variables.$mGrey;
+        }
+
+        &.open-button {
+          background-color: variables.$blue;
+        }
+      }
+    }
+
+    .nodes {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      overflow-x: auto;
+    }
+  }
+}
