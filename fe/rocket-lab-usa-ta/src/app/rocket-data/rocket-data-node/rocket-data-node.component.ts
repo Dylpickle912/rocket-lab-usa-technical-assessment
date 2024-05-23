@@ -12,6 +12,7 @@ import {ExpansionPanelComponent} from "../../../shared/components/expansion-pane
 import {MatDialog} from "@angular/material/dialog";
 import {RocketService} from "../../../shared/services/rocket.service";
 import {AddNodeDialogComponent} from "../../../shared/components/add-node-dialog/add-node-dialog.component";
+import {TimeSinceCreationPipe} from "../../../shared/pipes/time-since-creation.pipe";
 
 @Component({
   selector: 'app-rocket-data-node',
@@ -24,7 +25,8 @@ import {AddNodeDialogComponent} from "../../../shared/components/add-node-dialog
     ExpansionPanelComponent,
     NgTemplateOutlet,
     DecimalPipe,
-    AsyncPipe
+    AsyncPipe,
+    TimeSinceCreationPipe
   ],
   templateUrl: './rocket-data-node.component.html',
   styleUrl: './rocket-data-node.component.scss'

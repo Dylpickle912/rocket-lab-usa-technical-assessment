@@ -7,8 +7,6 @@ export class RocketService {
 
   constructor(private readonly dataService: DataService) { }
 
-  // Debating whether to add Rocket model
-
   public fetchRocketDetails(path?: string): DataNode | undefined {
     return this.dataService.getSubtree(this.returnPath(path));
   }

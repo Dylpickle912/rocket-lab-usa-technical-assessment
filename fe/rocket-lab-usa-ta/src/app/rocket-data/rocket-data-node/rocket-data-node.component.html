@@ -25,6 +25,7 @@
            (click)="$event.stopPropagation(); onNavigate()">
           {{dataNode.key}}
         </p>
+        <div class="created">{{dataNode.createdDate | timeSinceCreation}}</div>
         <div class="contextMenu">
           <button type="button" title="Add Node"
             (click)="$event.stopPropagation(); onOpenAddDialog()">

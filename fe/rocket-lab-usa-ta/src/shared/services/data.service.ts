@@ -65,7 +65,10 @@ export class DataService {
     const parentNode = this.findNode(path);
     if (!parentNode) return;
     if (!parentNode.children) parentNode.children = [];
-    if (parentNode.children.find(child => child.key === nodeName)) return;
+    if (parentNode.children.find(child => child.key === nodeName)) {
+      window.alert('A node with this key already exists.');
+      return;
+    }
     parentNode.children.push({ key: nodeName, createdDate: new Date() });
   }
 
@@ -73,6 +76,10 @@ export class DataService {
     const node = this.findNode(path);
     if (!node) return;
     if (!node.children) node.children = [];
+    if (node.children.find(child => child.key === property.key)) {
+      window.alert('A property with this key already exists.');
+      return;
+    }
     node.children.push({
       ...property,
       createdDate: new Date()

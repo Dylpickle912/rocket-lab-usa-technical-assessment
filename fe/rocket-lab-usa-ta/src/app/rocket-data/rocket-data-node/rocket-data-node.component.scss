@@ -36,6 +36,10 @@
     }
 
     .key-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
       position: relative;
 
       .key {
@@ -53,6 +57,14 @@
           text-decoration: underline;
           color: variables.$blue;
         }
+      }
+
+      .created {
+        font: {
+          family: mRegular;
+          size: 10px;
+        }
+        color: variables.$lGrey;
       }
 
       .contextMenu {
