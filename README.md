@@ -218,3 +218,34 @@ The `ShavePathsPipe` is a custom Angular pipe that processes an array of path su
 **Overview**
 
 The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a human-readable relative time format, indicating how long ago the date occurred.
+
+
+
+
+
+# Instructions on How to Run Each Part of the Challenge
+
+1. Viewing Rocket data in a visual hierarchy
+   - This is automatically done upon page initialization. If a node has a child, it includes an expansion panel that can be navigated.
+2. Searching for a node path
+   - At the top of the screen, there is a light grey input box with the placeholder `Search for a node...`. Click that and begin typing to search for a node path. It will match exact paths, so it will show no results until an exact matching path is typed in. The suggestions on the right are helpful for finding the possible paths.
+3. The label of a property should be GREEN if the value is greater than 10
+   - This can be viewed within the content section of an expansion panel
+4. View a reusable Confirmation Dialog component
+   - Upon hovering over any node in the hierarchy, a Trash Can icon will appear.
+   - Clicking this Trash Can will open a confirmation dialog.
+5. View a Save Dialog component
+   - Once again, upon hovering over any node in the hierarchy, a Plus icon will appear.
+   - Clicking this Plus icon will open a new dialog with two inputs, one for a `Key` and one for an optional `Value`
+6. View the Time Since Creation for a node
+   - To the right of each node's `Key` in the visual hierarchy, text similar to `created 1 minute ago` can be seen.
+   - To see this number change. Each time the list is refreshed, the time will recalculate. Some ways to refresh the list are as follows:
+     - Change the value inside the path search input
+     - Select one of the Suggested paths on the top right
+     - Select the Key of any node in the hierarchy list
+7. Run the unit test to assert that the color of the Component B label behaves as required
+   - There are two methods to achieve this:
+     - In the terminal, run `ng test` and the tests will run, including the one checking color of the Key
+     - In the file structure, navigate to `src/app/rocket-data/rocket-data-node/rocket-data.node.component.spec.ts`
+       - Once inside this file, right click the `RocketDataNodeComponent` description function and select `Run 'RocketDataNodeComponent'`
+       - Navigate down to line 36 on the `Check Data Value` description function and either right click and select `Run 'Check Data Value'` or select the green arrow to the left and run it that way
