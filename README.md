@@ -275,10 +275,9 @@ The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a
 
 # Key Challenges
 - **Data Schema**
-  - The structure of the given seed data was non-relational. It seemed to have any combination of children and properties.
-  - What brought me to the label `non-relational` is due to the lack of defined schema. This was a newer concept to me that I had to adapt to and really think outside the box about. I believe my approach of introducing a recursive Interface of `DataNode` was a good approach.
+  - The provided seed data was `non-relational` which I have not worked with too much. This was a newer concept to me that I had to adapt to and really think outside the box about. I believe my approach of introducing a recursive Interface of `DataNode` was a solid approach and I believe the way I handled the data structure was optimal.
 - **Creating the Mock Database Within the Front-End**
-  - I have always had some sort of data to work with from a backend so learning how to develop a fake API that worked with non-relational data was a real curveball but I believe I came up with a good approach
+  - I have always had some sort of data to work with from a backend so learning how to develop a fake API that worked with non-relational data was a real curveball but I believe I came up with a good approach to figuring out how to structure the database schema. I would say creating the `DataService` took me the longest due to me having to create way to grab a specific node in the hierarchy using just a path. I believe my approach of using recursive methods to dive deeper into the child nodes was a great approach. Since creating non-relational seed data with a fake API isn't typically something you'd do in a production environment, I would say it is great that developing the rest of the app was smooth sailing after having to figure out this `DataService`
  
 
 
@@ -286,11 +285,12 @@ The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a
 
 # Caveats and Potential Downfalls
 - With enough data and children, the visual hierarchy would squeeze onto the right side and run out of room.
+- The only potential downfall might be with the path search, but I believe I have handled all use cases properly within my own testing
 
 
 
 
 # What I Would Do Differently in a Production Environment
-- I would definitely change the seed data structure to be more relational that way fields are known and data can be displayed better.
-- I would plan out the UI better to make it more easily accessable and appealing to the user
+- I would change the seed data structure to be more relational that way fields are known and data can be displayed more efficiently
+- I would plan out the UI better to make it more easily accessible and appealing to the user
 - I believe using a real database and API would alleviate most of the complexity around the CRUD functionality. This would also assist with the creation of paths within the data hierarchy
