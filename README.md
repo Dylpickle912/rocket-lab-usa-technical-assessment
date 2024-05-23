@@ -266,3 +266,29 @@ The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a
 - I just enjoy this icon library. I didn't have to use it for much so it might've been a little overkill. I needed the icons though and didn't think it was responsible to spend much time creating a small icon library on IcoMoon.
 - References:
   - [Font Awesome](https://fontawesome.com/search?q=navig&o=r&m=free)
+
+
+
+
+
+# Key Challenges
+- **Data Schema**
+  - The structure of the given seed data was non-relational. It seemed to have any combination of children and properties.
+  - What brought me to the label `non-relational` is due to the lack of defined schema. This was a newer concept to me that I had to adapt to and really think outside the box about. I believe my approach of introducing a recursive Interface of `DataNode` was a good approach.
+- **Creating the Mock Database Within the Front-End**
+  - I have always had some sort of data to work with from a backend so learning how to develop a fake API that worked with non-relational data was a real curveball but I believe I came up with a good approach
+ 
+
+
+
+
+# Caveats and Potential Downfalls
+- With enough data and children, the visual hierarchy would squeeze onto the right side and run out of room.
+
+
+
+
+# What I Would Do Differently in a Production Environment
+- I would definitely change the seed data structure to be more relational that way fields are known and data can be displayed better.
+- I would plan out the UI better to make it more easily accessable and appealing to the user
+- I believe using a real database and API would alleviate most of the complexity around the CRUD functionality. This would also assist with the creation of paths within the data hierarchy
