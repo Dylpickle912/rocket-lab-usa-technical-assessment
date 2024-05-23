@@ -249,3 +249,20 @@ The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a
      - In the file structure, navigate to `src/app/rocket-data/rocket-data-node/rocket-data.node.component.spec.ts`
        - Once inside this file, right click the `RocketDataNodeComponent` description function and select `Run 'RocketDataNodeComponent'`
        - Navigate down to line 36 on the `Check Data Value` description function and either right click and select `Run 'Check Data Value'` or select the green arrow to the left and run it that way
+
+
+
+
+# Rationale Behind Tools
+
+**Angular Material**
+- I used this package because I wanted to utilize the Expansion Panel and Accordion. I also used this package for the Mat Dialogs. I didn't initially intend to use Mat Dialog, but I read `Use the Dialog component` in the Component B instructions and decided that meant Mat Dialog. Initially, I was just going to make my own dialog using CdkOverlay.
+- References:
+  - [Mat Dialog](https://material.angular.io/components/dialog/overview)
+  - [Expansion Panel](https://material.angular.io/components/expansion/examples)
+  - [Expansion Panel Accordion (used to Close All and Open All expansion panels at once)](https://stackblitz.com/edit/stackoverflow-49230894-3?file=app%2Fexpansion-overview-example.html,app%2Fexpansion-overview-example.ts)
+
+**Font Awesome**
+- I just enjoy this icon library. I didn't have to use it for much so it might've been a little overkill. I needed the icons though and didn't think it was responsible to spend much time creating a small icon library on IcoMoon.
+- References:
+  - [Font Awesome](https://fontawesome.com/search?q=navig&o=r&m=free)
