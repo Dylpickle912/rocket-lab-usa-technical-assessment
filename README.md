@@ -151,3 +151,19 @@ The `RocketDataNodeComponent` represents a data node in a hierarchical structure
      - Calls the `RocketService`'s `addProperty()` to add a new Property within the current path
    - `onDeletePath()`
      - Calls the `RocketService`'s `deleteNode()` to remove the current path
+
+
+
+### AddNodeDialogComponent
+
+**Overview**
+
+The `AddNodeDialogComponent` provides a `MatDialog` interface for adding a new Node or Property to the Rocket data structure. It allows the user to input a `Key` and an optional `Value`. From there, the user can decide to Cancel or Save their entry.  There is logic in the `DataService` for adding a Node or Property that will display a `window.alert()` notifying the user if the Key they inserted already exists on the current path. If it already exists, the method will abandon the POST.
+
+**Functions**
+
+- Public Methods
+  - `onCancel()`
+    - Closes the dialog without returning any data.
+  - `onConfirm()`
+    - Closes the dialog and returns a `DataNode` object
