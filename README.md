@@ -202,3 +202,10 @@ The `ExpansionPanelComponent` is a custom Angular component that wraps Angular M
 **Overview**
 
 The `BoldPathSuggestionPipe` is a custom Angular pipe designed to highlight search terms within a string by wrapping them in a `<span>` element with the class `.bold`. This is useful for visually emphasizing matching text in search results or suggestions.
+
+
+### ShavePathsPipe
+
+**Overview**
+
+The `ShavePathsPipe` is a custom Angular pipe that processes an array of path suggestions to simplify and extract unique top-level paths based on the current path context. This is useful for providing concise and relevant path suggestions in hierarchical structures.
