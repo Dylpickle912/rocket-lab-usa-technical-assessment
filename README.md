@@ -219,7 +219,7 @@ The `ShavePathsPipe` is a custom Angular pipe that processes an array of path su
 
 **Overview**
 
-The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a human-readable relative time format, indicating how long ago the date occurred.
+The `TimeSinceCreationPipe` is a custom Angular pipe that converts a date into a human-readable relative time format, indicating how long ago the date occurred. This will return a value similar to `created [n] minute(s) ago`
 
 
 
