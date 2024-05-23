@@ -167,3 +167,19 @@ The `AddNodeDialogComponent` provides a `MatDialog` interface for adding a new N
     - Closes the dialog without returning any data.
   - `onConfirm()`
     - Closes the dialog and returns a `DataNode` object
+
+
+
+### ConfirmationDialogComponent
+
+**Overview**
+
+The `ConfirmationDialogComponent` provides a `MatDialog` interface for displaying a confirmation dialog with a customizable title, message, and action buttons. It allows the user to either confirm or cancel the action, returning a boolean value indicating the user's choice.
+
+**Functions**
+
+- Public Methods
+  - `onCancel()`
+    - Closes the dialog and returns `false`, indicating the user cancelled the action
+  - `onConfirm()`
+    - Closes teh dialog and returns `true`, indicating the user confirmed the action
