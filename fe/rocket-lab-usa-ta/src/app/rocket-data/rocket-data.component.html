@@ -38,7 +38,8 @@
         [dataNode]="data"
         [expandChildren]="true"
         [currentSearch]="(currentPath$ | async) ?? ''"
-        (emitPathSelected)="onSearchPathChanged($event)">
+        (emitPathSelected)="onSearchPathChanged($event)"
+        (emitRefreshData)="onRefreshData()">
       </app-rocket-data-node>
     </mat-accordion>
   </div>

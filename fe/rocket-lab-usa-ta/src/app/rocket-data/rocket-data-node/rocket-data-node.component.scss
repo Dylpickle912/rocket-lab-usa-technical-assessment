@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   gap: 0.25rem;
   position: relative;
 
@@ -26,20 +27,65 @@
     justify-content: space-between;
     padding-right: 1rem;
 
-    .key {
-      font: {
-        family: mMedium;
-        size: 14px;
+    &:hover {
+      .key-container {
+        .contextMenu {
+          display: flex;
+        }
       }
-      cursor: pointer;
+    }
 
-      &.valueOverTen {
-        color: variables.$green;
+    .key-container {
+      position: relative;
+
+      .key {
+        font: {
+          family: mMedium;
+          size: 14px;
+        }
+        cursor: pointer;
+
+        &.valueOverTen {
+          color: variables.$green;
+        }
+
+        &:hover {
+          text-decoration: underline;
+          color: variables.$blue;
+        }
       }
 
-      &:hover {
-        text-decoration: underline;
-        color: variables.$blue;
+      .contextMenu {
+        display: none;
+        flex-direction: row;
+        width: max-content;
+        padding: 0.25rem;
+        position: absolute;
+        top: 50%;
+        right: -2rem;
+        transform: translateY(-50%);
+
+        button {
+          width: max-content;
+          height: max-content;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          cursor: pointer;
+
+          i {
+            font-size: 12px;
+            color: variables.$mGrey;
+            transition: color .2s;
+          }
+
+          &:hover,
+          &:focus {
+            i {
+              color: variables.$blue;
+            }
+          }
+        }
       }
     }
 
