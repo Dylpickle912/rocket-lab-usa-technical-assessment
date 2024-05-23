@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RocketDataNodeComponent } from './rocket-data-node.component';
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {RocketService} from "../../../shared/services/rocket.service";
 
 describe('RocketDataNodeComponent', () => {
   let component: RocketDataNodeComponent;
@@ -10,7 +12,15 @@ describe('RocketDataNodeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RocketDataNodeComponent]
+      imports: [RocketDataNodeComponent],
+      providers: [
+        {
+          provide: MatDialog, useValue: jasmine.createSpyObj(MatDialog.name, ['open'])
+        },
+        {
+          provide: RocketService, useValue: jasmine.createSpyObj(RocketService.name, ['addNode', 'addProperty', 'deleteNode'])
+        }
+      ]
     })
     .compileComponents();
 
@@ -30,7 +40,8 @@ describe('RocketDataNodeComponent', () => {
       beforeEach(() => {
         component.dataNode = {
           key: 'Label',
-          value: 15
+          value: 15,
+          createdDate: new Date()
         }
 
         fixture.detectChanges();
@@ -49,7 +60,8 @@ describe('RocketDataNodeComponent', () => {
       beforeEach(() => {
         component.dataNode = {
           key: 'Label',
-          value: 7.648
+          value: 7.648,
+          createdDate: new Date()
         }
 
         fixture.detectChanges();
