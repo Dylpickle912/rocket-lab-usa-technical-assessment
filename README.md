@@ -92,6 +92,13 @@ The `RocketDataComponent` is designed to manage and display data from the `Rocke
 The `SuggestionsComponent` takes in all paths from the data structure that are immediate children of the current path. It utilizes the `ShavePathPipe` in the template to take the full path, compare it to the current valid path, and remove all unnecessary paths to only get the next immediate child. The component also takes in the current search input from the `RocketDataComponent` and utilizes the `BoldPipe` to bold letters in the results of the suggestions that match the search.
 
 
+**Functions**
+
+ - Public Methods
+   - `onSuggestionSelected(path: string)`
+     - Emits the selected path to the `RocketDataComponent` and appends it to the end of search input
+
+
 
 ### RocketDataNodeComponent (Component B)
 
