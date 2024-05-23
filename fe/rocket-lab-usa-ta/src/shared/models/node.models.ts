@@ -1,6 +1,7 @@
 export interface NodeProperty {
   key: string,
-  value?: number
+  value?: number,
+  createdDate: Date
 }
 
 export interface DataNode extends NodeProperty {
