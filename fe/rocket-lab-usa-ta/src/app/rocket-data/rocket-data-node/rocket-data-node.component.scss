@@ -70,11 +70,12 @@
       .contextMenu {
         display: none;
         flex-direction: row;
+        gap: 0.5rem;
         width: max-content;
         padding: 0.25rem;
         position: absolute;
         top: 50%;
-        right: -2rem;
+        left: calc(100% + 1rem);
         transform: translateY(-50%);
 
         button {
@@ -91,10 +92,21 @@
             transition: color .2s;
           }
 
-          &:hover,
-          &:focus {
-            i {
-              color: variables.$blue;
+          &.positive {
+            &:hover,
+            &:focus {
+              i {
+                color: variables.$blue;
+              }
+            }
+          }
+
+          &.negative {
+            &:hover,
+            &:focus {
+              i {
+                color: variables.$red;
+              }
             }
           }
         }

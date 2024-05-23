@@ -13,6 +13,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {RocketService} from "../../../shared/services/rocket.service";
 import {AddNodeDialogComponent} from "../../../shared/components/add-node-dialog/add-node-dialog.component";
 import {TimeSinceCreationPipe} from "../../../shared/pipes/time-since-creation.pipe";
+import {
+  ConfirmationDialogComponent
+} from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-rocket-data-node',
@@ -66,6 +69,23 @@ export class RocketDataNodeComponent implements OnChanges {
     });
   }
 
+  public onOpenDeleteDialog(): void {
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete Node',
+        message: 'Are you sure you want to delete node at path: ' + this.currentPath,
+        buttonText: 'Delete',
+        buttonStatus: 'Negative'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (!result) return;
+      this.onDeletePath();
+      this.emitRefreshData.emit();
+    });
+  }
+
   private onSaveData(result: DataNode): void {
     result.value ? this.onAddProperty(result) : this.onAddNode(result.key);
   }
@@ -76,5 +96,9 @@ export class RocketDataNodeComponent implements OnChanges {
 
   private onAddProperty(property: DataNode): void {
     this.rocketService.addProperty(property, this.currentPath);
+  }
+
+  private onDeletePath(): void {
+    this.rocketService.deleteNode(this.currentPath);
   }
 }

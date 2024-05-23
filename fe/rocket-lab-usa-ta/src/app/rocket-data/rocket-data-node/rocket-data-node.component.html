@@ -27,9 +27,14 @@
         </p>
         <div class="created">{{dataNode.createdDate | timeSinceCreation}}</div>
         <div class="contextMenu">
-          <button type="button" title="Add Node"
+          <button type="button" class="positive" title="Add Node"
             (click)="$event.stopPropagation(); onOpenAddDialog()">
             <i class="fa-solid fa-plus"></i>
+          </button>
+          <button type="button" class="negative" title="Delete Node"
+                  *ngIf="currentPath"
+                  (click)="$event.stopPropagation(); onOpenDeleteDialog()">
+            <i class="fa-solid fa-trash-can"></i>
           </button>
         </div>
       </div>
