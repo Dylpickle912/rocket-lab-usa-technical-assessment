@@ -98,3 +98,23 @@ The `SuggestionsComponent` takes in all paths from the data structure that are i
 **Overview**
 
 The `RocketDataNodeComponent` represents a data node in a hierarchical structure. It provides functionalities for navigating, adding, deleting nodes, and displaying node details using recursive nested expansion panels. This component takes in an instance of a `DataNode` as one of its `Input()`s. Since the `DataNode` interface is recursive in itself, where it holds an optional `Children` property of type `DataNode[]`. Due to this, if there are existing children inside this `DataNode`, this component is recursively called inside its `ExpansionPanel` content. This provides the visual structure to look like a nested tree. Within this recursive functionality, we are provided a simple way to select the Key of any node and emit that up to our search input, thus, click navigation of the hierarchy is achieved. Along with displaying the data, as requested in the `Component B` instructions, an `ngClass` directive is added on the Key that adds the `.valueOverTen` class to change the color of the key's text to green. Also as instructed, this component contains a method to open the `AddNodeDialogComponent` to utilize the RocketService's ability to add Nodes and Properties to the current path. Another method is used to open the `ConfirmationDialogComponent` to utilize the RocketService's ability to delete node structures by passing in the current path upon confirmation.
+
+**Functions**
+
+ - Public Methods
+   - `onNavigate()`
+     - Emits the current path to the `RocketDataComponent` to display the desired data structure
+   - `onOpenAddDialog()`
+     - Opens a dialog that allows the user to add a new Node or Property to the current path
+   - `onOpenDeleteDialog()`
+     - Opens a dialog that allows the user to delete the current path
+
+ - Private Methods
+   - `onSaveData(result: DataNode)`
+     - Determines whether to add a node or property based off whether `result.value` is undefined
+   - `onAddNode(key: string)`
+     - Calls the `RocketService`'s `addNode()` to add a new Node within the current path
+   - `onAddProperty(property: DataNode)`
+     - Calls the `RocketService`'s `addProperty()` to add a new Property within the current path
+   - `onDeletePath()`
+     - Calls the `RocketService`'s `deleteNode()` to remove the current path
